@@ -14,9 +14,10 @@ export default function DynamicFavicon() {
       initials = words.slice(0, 2).map(w => w[0]).join('').toUpperCase()
     }
 
+    const fontSize = initials.length > 2 ? 20 : 28
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-      <rect width="64" height="64" rx="12" fill="#0D1117"/>
-      <text x="32" y="44" text-anchor="middle" font-family="cursive,serif" font-weight="700" font-size="${initials.length > 2 ? '20' : '28'}" fill="#0EA5E9">${initials}</text>
+      <rect width="64" height="64" rx="14" fill="#0D1117"/>
+      <text x="32" y="46" text-anchor="middle" font-family="'Segoe Script','Brush Script MT','Dancing Script',cursive" font-weight="700" font-size="${fontSize}" fill="#0EA5E9" font-style="italic">${initials}</text>
     </svg>`
 
     const blob = new Blob([svg], { type: 'image/svg+xml' })

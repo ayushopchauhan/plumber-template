@@ -66,7 +66,7 @@ export default function ServiceAreas() {
                   className="text-xs font-semibold text-white"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {area.responseTime} response
+                  {typeof area.responseTime === 'number' ? `${area.responseTime} min` : area.responseTime} response
                 </span>
               </div>
             </div>

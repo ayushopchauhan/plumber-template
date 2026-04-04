@@ -1,5 +1,5 @@
 import config from '../siteConfig'
-import { Phone, Mail, MapPin, Facebook, ExternalLink } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, ExternalLink } from 'lucide-react'
 
 const navLinks = [
   { label: 'Services', href: '#services' },
@@ -10,6 +10,7 @@ const navLinks = [
 
 const socialIcons = {
   facebook: Facebook,
+  instagram: Instagram,
   google: ExternalLink,
   yelp: ExternalLink,
   nextdoor: ExternalLink,
@@ -120,6 +121,7 @@ export default function Footer() {
                     {contact.phoneDisplay}
                   </a>
                 </li>
+                {contact.email && (
                 <li>
                   <a
                     href={`mailto:${contact.email}`}
@@ -130,6 +132,7 @@ export default function Footer() {
                     {contact.email}
                   </a>
                 </li>
+                )}
                 <li className="flex items-start gap-2 text-sm text-[var(--color-cream)]/70" style={{ fontFamily: 'var(--font-body)' }}>
                   <MapPin className="w-4 h-4 text-[var(--color-blue)]/60 flex-shrink-0 mt-0.5" />
                   {contact.fullAddress}

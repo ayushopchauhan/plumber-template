@@ -307,7 +307,8 @@ export default function Contact() {
               </div>
             </a>
 
-            {/* Email */}
+            {/* Email - only show if real email exists */}
+            {contact.email && (
             <a
               href={`mailto:${contact.email}`}
               className="flex items-center gap-4 p-5 rounded-xl card-dark transition-all duration-300 group"
@@ -324,6 +325,7 @@ export default function Contact() {
                 </p>
               </div>
             </a>
+            )}
 
             {/* Address */}
             <div className="flex items-center gap-4 p-5 rounded-xl card-dark">
