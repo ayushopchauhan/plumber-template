@@ -41,16 +41,16 @@ function LogoMark() {
     .toUpperCase()
 
   return (
-    <div
-      className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg flex items-center justify-center font-bold text-sm lg:text-base shrink-0"
+    <span
+      className="text-2xl lg:text-3xl shrink-0 leading-none"
       style={{
-        background: 'linear-gradient(135deg, var(--color-blue), var(--color-blue-dark, #0369a1))',
-        color: 'white',
-        fontFamily: 'var(--font-heading)',
+        fontFamily: "'Dancing Script', cursive",
+        fontWeight: 700,
+        color: 'var(--color-blue)',
       }}
     >
       {initials}
-    </div>
+    </span>
   )
 }
 

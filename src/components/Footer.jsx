@@ -45,24 +45,28 @@ export default function Footer() {
               >
                 {business.tagline}
               </p>
-              {/* Social Icons */}
-              <div className="flex gap-2">
-                {Object.entries(social).map(([platform, url]) => {
-                  const Icon = socialIcons[platform] || ExternalLink
-                  return (
-                    <a
-                      key={platform}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-lg bg-[var(--color-surface)] hover:bg-[var(--color-blue)]/20 flex items-center justify-center transition-all duration-300 group hover:scale-105"
-                      aria-label={platform}
-                    >
-                      <Icon className="w-[18px] h-[18px] text-[var(--color-cream)]/50 group-hover:text-[var(--color-blue)] transition-colors" />
-                    </a>
-                  )
-                })}
-              </div>
+              {/* Social Icons - only show if real URLs exist */}
+              {Object.entries(social).some(([, url]) => url && url.trim() && !url.includes('example.com') && !url.includes('placeholder')) && (
+                <div className="flex gap-2">
+                  {Object.entries(social)
+                    .filter(([, url]) => url && url.trim() && !url.includes('example.com') && !url.includes('placeholder'))
+                    .map(([platform, url]) => {
+                      const Icon = socialIcons[platform] || ExternalLink
+                      return (
+                        <a
+                          key={platform}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 rounded-lg bg-[var(--color-surface)] hover:bg-[var(--color-blue)]/20 flex items-center justify-center transition-all duration-300 group hover:scale-105"
+                          aria-label={platform}
+                        >
+                          <Icon className="w-[18px] h-[18px] text-[var(--color-cream)]/50 group-hover:text-[var(--color-blue)] transition-colors" />
+                        </a>
+                      )
+                    })}
+                </div>
+              )}
             </div>
 
             {/* Col 2: Quick Links */}
@@ -142,10 +146,16 @@ export default function Footer() {
                 Credentials
               </h4>
               <ul className="space-y-2.5 text-sm text-[var(--color-cream)]/70" style={{ fontFamily: 'var(--font-body)' }}>
-                <li>Licensed: {business.licenseNumber}</li>
-                <li>Insured: {business.insuranceAmount} General Liability</li>
-                <li>{credentials.yearsExperience} Years in Business</li>
-                <li>{credentials.warrantyYears}-Year Warranty on All Work</li>
+                {business.licenseNumber && <li>Licensed: {business.licenseNumber}</li>}
+                {!business.licenseNumber && <li>Fully Licensed & Insured</li>}
+                {business.insuranceAmount && <li>Insured: {business.insuranceAmount} General Liability</li>}
+                <li>{credentials.yearsExperience}+ Years in Business</li>
+                {credentials.guaranteeDays
+                  ? <li>{credentials.guaranteeDays}-Day Money-Back Guarantee</li>
+                  : credentials.warrantyYears
+                    ? <li>{credentials.warrantyYears}-Year Warranty on All Work</li>
+                    : null
+                }
               </ul>
             </div>
           </div>
@@ -165,7 +175,7 @@ export default function Footer() {
               className="text-xs text-[var(--color-cream)]/30"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              Licensed: {business.licenseNumber} | Insured: {business.insuranceAmount} General Liability
+              {business.licenseNumber ? `Licensed: ${business.licenseNumber} | ` : 'Licensed & '}Insured{business.insuranceAmount ? `: ${business.insuranceAmount} General Liability` : ''}
             </p>
           </div>
         </div>
