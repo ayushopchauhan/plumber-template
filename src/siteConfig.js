@@ -1,6 +1,6 @@
 // Auto-generated siteConfig for A&E NYC Plumbing
 // Generated: 2026-04-04T20:33:29.759Z
-// Corrected: 2026-04-05 (verified real data)
+// Corrected: 2026-04-05 (deep-research verified data)
 
 const siteConfig = {
   "business": {
@@ -8,9 +8,8 @@ const siteConfig = {
     "ownerName": "A&E NYC Plumbing",
     "ownerFirstName": "A&E",
     "tagline": "Reliable Plumbing in New York",
-    "description": "A&E NYC Plumbing offers expert plumbing services in New York. With 10 years of experience, we ensure quality and reliability.",
-    "story": "A&E NYC Plumbing has been serving the New York community for over a decade. We pride ourselves on providing top-notch plumbing services with a focus on customer satisfaction. Our team is dedicated to solving your plumbing issues efficiently.",
-    "founded": 2016,
+    "description": "A&E NYC Plumbing offers expert plumbing services across all boroughs of New York City. Licensed, insured, and committed to quality.",
+    "story": "A&E NYC Plumbing serves the New York City community with reliable, professional plumbing services. Based in Manhattan's Financial District, our team handles everything from emergency repairs to full installations across all five boroughs. We pride ourselves on showing up on time, quoting fair prices, and getting the job done right.",
     "licenseNumber": "",
     "insuranceProvider": "",
     "insuranceAmount": "",
@@ -31,16 +30,16 @@ const siteConfig = {
     "hours": "Mon-Sun 9am-9pm | Emergency 24/7"
   },
   "credentials": {
-    "yearsExperience": 10,
+    "yearsExperience": 0,
     "responseTime": 45,
     "googleRating": 5.0,
-    "reviewCount": 65,
+    "reviewCount": 130,
     "guaranteeDays": 90
   },
   "hero": {
     "backgroundImage": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=2000&q=80",
-    "headline": "Top Plumbers in New York",
-    "subheadline": "Expert plumbing services you can trust.",
+    "headline": "Top-Rated Plumbers in New York",
+    "subheadline": "5-star rated. Licensed and insured. Serving all five boroughs.",
     "ctaText": "Get a Free Quote",
     "emergencyCtaText": "Emergency? Call Now",
     "urgencyBadge": "Available 24/7"
@@ -56,86 +55,110 @@ const siteConfig = {
     },
     {
       "icon": "CheckCircle",
-      "label": "65+ Reviews"
+      "label": "130+ Reviews"
     },
     {
       "icon": "Clock",
-      "label": "45 min Response"
+      "label": "Same-Day Service"
     },
     {
       "icon": "Award",
-      "label": "10+ Years Experience"
+      "label": "90-Day Guarantee"
     }
   ],
   "stats": [
     {
-      "number": 10,
-      "suffix": "+",
-      "label": "Years Experience"
-    },
-    {
       "number": 5.0,
-      "suffix": "★",
+      "suffix": "\u2605",
       "label": "Google Rating"
     },
     {
-      "number": 65,
+      "number": 130,
       "suffix": "+",
-      "label": "Google Reviews"
+      "label": "Verified Reviews"
     },
     {
-      "number": 45,
-      "suffix": "min",
-      "label": "Avg Response Time"
+      "number": 5,
+      "suffix": "",
+      "label": "Boroughs Served"
+    },
+    {
+      "number": 90,
+      "suffix": "-day",
+      "label": "Money-Back Guarantee"
     }
   ],
   "services": [
     {
       "name": "Emergency Plumbing",
-      "description": "24/7 emergency plumbing services to handle any urgent issues.",
+      "description": "24/7 emergency plumbing services to handle any urgent issues across NYC.",
       "icon": "Emergency",
-      "priceRange": "$150 - $500",
+      "priceRange": "Call for quote",
       "popular": true,
       "features": [
         "24/7 Availability",
-        "Quick Response",
-        "Certified Plumbers"
+        "Same-Day Response",
+        "All Five Boroughs"
       ]
     },
     {
-      "name": "Drain Cleaning",
-      "description": "Professional drain cleaning services to keep your pipes clear.",
+      "name": "Drain Repair & Cleaning",
+      "description": "Professional drain cleaning and sewer line repair to keep your pipes clear.",
       "icon": "Drain",
-      "priceRange": "$100 - $300",
+      "priceRange": "Call for quote",
       "popular": true,
       "features": [
         "High-Pressure Cleaning",
         "Camera Inspection",
-        "Preventative Maintenance"
+        "Sewer Line Repair"
       ]
     },
     {
-      "name": "Water Heater Repair",
-      "description": "Expert repair services for all types of water heaters.",
+      "name": "Water Heater Services",
+      "description": "Repair and installation for all types of water heaters, including tankless.",
       "icon": "WaterHeater",
-      "priceRange": "$200 - $800",
+      "priceRange": "Call for quote",
       "popular": false,
       "features": [
-        "All Brands",
-        "Energy Efficient Solutions",
-        "Warranty Included"
+        "Tank & Tankless",
+        "Installation & Repair",
+        "Energy Efficient Options"
       ]
     },
     {
-      "name": "Leak Detection",
-      "description": "Accurate leak detection services to prevent water damage.",
+      "name": "Leak Detection & Repair",
+      "description": "Accurate leak detection and pipe repair to prevent costly water damage.",
       "icon": "Leak",
-      "priceRange": "$100 - $400",
+      "priceRange": "Call for quote",
       "popular": false,
       "features": [
         "Non-Invasive Methods",
-        "Advanced Technology",
-        "Comprehensive Reports"
+        "Pipe & Re-Piping",
+        "Frozen Pipe Repair"
+      ]
+    },
+    {
+      "name": "Gas Line Services",
+      "description": "Gas line repair and installation by certified professionals.",
+      "icon": "Flame",
+      "priceRange": "Call for quote",
+      "popular": false,
+      "features": [
+        "Gas Line Repair",
+        "New Installation",
+        "Safety Inspection"
+      ]
+    },
+    {
+      "name": "Fixture Installation",
+      "description": "Faucet, toilet, shower, and dishwasher installation and repair.",
+      "icon": "Wrench",
+      "priceRange": "Call for quote",
+      "popular": false,
+      "features": [
+        "Faucets & Toilets",
+        "Showers & Tubs",
+        "Dishwasher Hookup"
       ]
     }
   ],
@@ -149,13 +172,13 @@ const siteConfig = {
     {
       "step": 2,
       "title": "Fast Dispatch",
-      "description": "A licensed plumber arrives at your door, on time, in a marked truck with the tools to handle your job.",
+      "description": "A licensed plumber arrives at your door, on time, with the tools to handle your job.",
       "icon": "Truck"
     },
     {
       "step": 3,
       "title": "Diagnose & Quote",
-      "description": "We inspect the problem, explain what we find, and give you a fixed price before touching a single pipe.",
+      "description": "We inspect the problem, explain what we find, and give you a price before touching a single pipe.",
       "icon": "Search"
     },
     {
@@ -175,29 +198,38 @@ const siteConfig = {
   "serviceAreas": [
     {
       "name": "Manhattan",
-      "description": "Serving all of Manhattan with fast, reliable plumbing services.",
-      "responseTime": "45 min"
+      "description": "Based in the Financial District, serving all of Manhattan.",
+      "responseTime": "Same day"
     },
     {
       "name": "Brooklyn",
       "description": "Expert plumbing services throughout Brooklyn.",
-      "responseTime": "45 min"
+      "responseTime": "Same day"
     },
     {
       "name": "Queens",
       "description": "Reliable plumbing solutions across Queens.",
-      "responseTime": "45 min"
+      "responseTime": "Same day"
     },
     {
       "name": "Bronx",
       "description": "Fast and efficient plumbing in the Bronx.",
-      "responseTime": "45 min"
+      "responseTime": "Same day"
+    },
+    {
+      "name": "Staten Island",
+      "description": "Plumbing services available in Staten Island.",
+      "responseTime": "Same day"
     }
   ],
   "faq": [
     {
       "question": "What should I do in case of a plumbing emergency?",
-      "answer": "In case of a plumbing emergency, turn off the main water supply and call us immediately at 646-392-7164. We offer 24/7 emergency service."
+      "answer": "Turn off the main water supply and call us immediately at 646-392-7164. We offer 24/7 emergency service across all five boroughs."
+    },
+    {
+      "question": "What areas do you serve?",
+      "answer": "We serve all five boroughs of New York City: Manhattan, Brooklyn, Queens, the Bronx, and Staten Island."
     },
     {
       "question": "How can I prevent clogged drains?",
@@ -205,15 +237,15 @@ const siteConfig = {
     },
     {
       "question": "What are the common signs of a water leak?",
-      "answer": "Common signs include increased water bills, damp spots on walls or ceilings, and the sound of running water when all taps are off. If you notice any of these, call us for a leak detection inspection."
-    },
-    {
-      "question": "How often should I have my plumbing inspected?",
-      "answer": "We recommend annual plumbing inspections to catch potential issues early and prevent costly repairs down the line."
+      "answer": "Common signs include increased water bills, damp spots on walls or ceilings, and the sound of running water when all taps are off. Call us for a leak detection inspection."
     },
     {
       "question": "Do you offer a guarantee on your work?",
       "answer": "Yes. We stand behind every job with a 90-day money-back guarantee. If you are not satisfied, we will make it right."
+    },
+    {
+      "question": "What services do you offer?",
+      "answer": "We handle drain repair, faucet installation, water heater repair and installation, gas line services, leak detection, piping and re-piping, toilet and shower repair, and dishwasher hookup."
     }
   ],
   "costEstimator": {
@@ -296,14 +328,14 @@ const siteConfig = {
         ]
       },
       {
-        "name": "Garbage Disposal",
-        "basePrice": 175,
-        "maxPrice": 500,
-        "unit": "per unit",
+        "name": "Gas Line Service",
+        "basePrice": 200,
+        "maxPrice": 1500,
+        "unit": "per service",
         "factors": [
-          "Horsepower rating",
-          "Existing wiring",
-          "Plumbing connections"
+          "Repair vs. new installation",
+          "Length of gas line",
+          "Permit requirements"
         ]
       }
     ]
@@ -320,7 +352,7 @@ const siteConfig = {
           "Open faucets to drain remaining water",
           "Move valuables away from the affected area"
         ],
-        "responseTime": "30 min",
+        "responseTime": "Same day",
         "costRange": "$150 - $800",
         "costOfDelay": "Water damage can cost $3,000+ per hour of flooding"
       },
@@ -334,7 +366,7 @@ const siteConfig = {
           "Open windows for ventilation",
           "Keep children and pets away"
         ],
-        "responseTime": "30 min",
+        "responseTime": "Same day",
         "costRange": "$300 - $2,500",
         "costOfDelay": "Sewage poses serious health risks. Every hour increases contamination"
       },
@@ -348,7 +380,7 @@ const siteConfig = {
           "Check circuit breaker for electric heaters",
           "Note the age of your water heater"
         ],
-        "responseTime": "2 hours",
+        "responseTime": "Same day",
         "costRange": "$150 - $500",
         "costOfDelay": "Usually not urgent, but if you smell gas, evacuate and call 911"
       },
@@ -398,36 +430,12 @@ const siteConfig = {
   },
   "waterCalculator": {
     "issues": [
-      {
-        "name": "Running toilet",
-        "monthlyWaste": 65,
-        "gallonsPerDay": 200
-      },
-      {
-        "name": "Dripping faucet",
-        "monthlyWaste": 20,
-        "gallonsPerDay": 15
-      },
-      {
-        "name": "Leaky pipe (hidden)",
-        "monthlyWaste": 45,
-        "gallonsPerDay": 50
-      },
-      {
-        "name": "Old water heater (inefficient)",
-        "monthlyWaste": 35,
-        "gallonsPerDay": 0
-      },
-      {
-        "name": "Outdated fixtures",
-        "monthlyWaste": 25,
-        "gallonsPerDay": 30
-      },
-      {
-        "name": "No pressure regulator",
-        "monthlyWaste": 15,
-        "gallonsPerDay": 20
-      }
+      { "name": "Running toilet", "monthlyWaste": 65, "gallonsPerDay": 200 },
+      { "name": "Dripping faucet", "monthlyWaste": 20, "gallonsPerDay": 15 },
+      { "name": "Leaky pipe (hidden)", "monthlyWaste": 45, "gallonsPerDay": 50 },
+      { "name": "Old water heater (inefficient)", "monthlyWaste": 35, "gallonsPerDay": 0 },
+      { "name": "Outdated fixtures", "monthlyWaste": 25, "gallonsPerDay": 30 },
+      { "name": "No pressure regulator", "monthlyWaste": 15, "gallonsPerDay": 20 }
     ]
   },
   "healthQuiz": {
