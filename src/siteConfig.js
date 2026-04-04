@@ -1,5 +1,6 @@
 // Auto-generated siteConfig for A&E NYC Plumbing
 // Generated: 2026-04-04T20:33:29.759Z
+// Corrected: 2026-04-05 (verified real data)
 
 const siteConfig = {
   "business": {
@@ -10,16 +11,16 @@ const siteConfig = {
     "description": "A&E NYC Plumbing offers expert plumbing services in New York. With 10 years of experience, we ensure quality and reliability.",
     "story": "A&E NYC Plumbing has been serving the New York community for over a decade. We pride ourselves on providing top-notch plumbing services with a focus on customer satisfaction. Our team is dedicated to solving your plumbing issues efficiently.",
     "founded": 2016,
-    "licenseNumber": "PLB-2016-04892",
-    "insuranceProvider": "State Farm Commercial",
-    "insuranceAmount": "$2M",
-    "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
-    "teamSize": 8
+    "licenseNumber": "",
+    "insuranceProvider": "",
+    "insuranceAmount": "",
+    "photoUrl": "",
+    "logoUrl": ""
   },
   "contact": {
     "phone": "+16463927164",
     "phoneDisplay": "646-392-7164",
-    "email": "info@ae-nyc.com",
+    "email": "",
     "address": "40 Fulton St",
     "city": "New York",
     "state": "NY",
@@ -27,16 +28,14 @@ const siteConfig = {
     "fullAddress": "40 Fulton St, New York, NY 10038",
     "emergencyPhone": "+16463927164",
     "emergencyPhoneDisplay": "646-392-7164",
-    "hours": "Call for hours | Emergency 24/7"
+    "hours": "Mon-Sun 9am-9pm | Emergency 24/7"
   },
   "credentials": {
     "yearsExperience": 10,
-    "jobsCompleted": 2000,
-    "satisfactionRate": 98,
     "responseTime": 45,
-    "googleRating": 5,
-    "reviewCount": 387,
-    "warrantyYears": 1
+    "googleRating": 5.0,
+    "reviewCount": 65,
+    "guaranteeDays": 90
   },
   "hero": {
     "backgroundImage": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=2000&q=80",
@@ -49,23 +48,23 @@ const siteConfig = {
   "trustBar": [
     {
       "icon": "Star",
-      "label": "5 Star Rating"
+      "label": "5.0 Google Rating"
     },
     {
       "icon": "Shield",
-      "label": "10 Years Experience"
+      "label": "Licensed & Insured"
     },
     {
       "icon": "CheckCircle",
-      "label": "Reliable Service"
+      "label": "65+ Reviews"
     },
     {
       "icon": "Clock",
-      "label": "45 min Avg Response"
+      "label": "45 min Response"
     },
     {
       "icon": "Award",
-      "label": "Customer Satisfaction"
+      "label": "10+ Years Experience"
     }
   ],
   "stats": [
@@ -75,14 +74,14 @@ const siteConfig = {
       "label": "Years Experience"
     },
     {
-      "number": 2000,
-      "suffix": "+",
-      "label": "Jobs Completed"
+      "number": 5.0,
+      "suffix": "★",
+      "label": "Google Rating"
     },
     {
-      "number": 98,
-      "suffix": "%",
-      "label": "Satisfaction Rate"
+      "number": 65,
+      "suffix": "+",
+      "label": "Google Reviews"
     },
     {
       "number": 45,
@@ -175,18 +174,18 @@ const siteConfig = {
   "testimonials": [],
   "serviceAreas": [
     {
+      "name": "Manhattan",
+      "description": "Serving all of Manhattan with fast, reliable plumbing services.",
+      "responseTime": "45 min"
+    },
+    {
       "name": "Brooklyn",
-      "description": "Providing expert plumbing services in Brooklyn.",
+      "description": "Expert plumbing services throughout Brooklyn.",
       "responseTime": "45 min"
     },
     {
       "name": "Queens",
-      "description": "Reliable plumbing solutions in Queens.",
-      "responseTime": "45 min"
-    },
-    {
-      "name": "Manhattan",
-      "description": "Serving Manhattan with top-notch plumbing services.",
+      "description": "Reliable plumbing solutions across Queens.",
       "responseTime": "45 min"
     },
     {
@@ -198,19 +197,23 @@ const siteConfig = {
   "faq": [
     {
       "question": "What should I do in case of a plumbing emergency?",
-      "answer": "In case of a plumbing emergency, turn off the main water supply and call a professional plumber immediately."
+      "answer": "In case of a plumbing emergency, turn off the main water supply and call us immediately at 646-392-7164. We offer 24/7 emergency service."
     },
     {
       "question": "How can I prevent clogged drains?",
-      "answer": "Regularly clean your drains and avoid disposing of grease or large food particles down the sink."
+      "answer": "Regularly clean your drains and avoid disposing of grease or large food particles down the sink. Schedule annual drain maintenance to keep your pipes flowing."
     },
     {
       "question": "What are the common signs of a water leak?",
-      "answer": "Common signs include increased water bills, damp spots on walls or ceilings, and the sound of running water when all taps are off."
+      "answer": "Common signs include increased water bills, damp spots on walls or ceilings, and the sound of running water when all taps are off. If you notice any of these, call us for a leak detection inspection."
     },
     {
       "question": "How often should I have my plumbing inspected?",
-      "answer": "It's recommended to have your plumbing inspected annually to catch any potential issues early."
+      "answer": "We recommend annual plumbing inspections to catch potential issues early and prevent costly repairs down the line."
+    },
+    {
+      "question": "Do you offer a guarantee on your work?",
+      "answer": "Yes. We stand behind every job with a 90-day money-back guarantee. If you are not satisfied, we will make it right."
     }
   ],
   "costEstimator": {
@@ -433,159 +436,78 @@ const siteConfig = {
         "id": "age",
         "question": "How old is your home?",
         "options": [
-          {
-            "label": "Less than 10 years",
-            "score": 0
-          },
-          {
-            "label": "10 to 25 years",
-            "score": 1
-          },
-          {
-            "label": "25 to 50 years",
-            "score": 2
-          },
-          {
-            "label": "Over 50 years",
-            "score": 3
-          }
+          { "label": "Less than 10 years", "score": 0 },
+          { "label": "10 to 25 years", "score": 1 },
+          { "label": "25 to 50 years", "score": 2 },
+          { "label": "Over 50 years", "score": 3 }
         ]
       },
       {
         "id": "water-pressure",
         "question": "How is your water pressure?",
         "options": [
-          {
-            "label": "Strong and consistent",
-            "score": 0
-          },
-          {
-            "label": "Varies throughout the day",
-            "score": 1
-          },
-          {
-            "label": "Noticeably weak",
-            "score": 2
-          },
-          {
-            "label": "Fluctuates wildly",
-            "score": 3
-          }
+          { "label": "Strong and consistent", "score": 0 },
+          { "label": "Varies throughout the day", "score": 1 },
+          { "label": "Noticeably weak", "score": 2 },
+          { "label": "Fluctuates wildly", "score": 3 }
         ]
       },
       {
         "id": "drains",
         "question": "How do your drains perform?",
         "options": [
-          {
-            "label": "Fast and clear",
-            "score": 0
-          },
-          {
-            "label": "Occasionally slow",
-            "score": 1
-          },
-          {
-            "label": "Frequently clogged",
-            "score": 2
-          },
-          {
-            "label": "Multiple drains are slow",
-            "score": 3
-          }
+          { "label": "Fast and clear", "score": 0 },
+          { "label": "Occasionally slow", "score": 1 },
+          { "label": "Frequently clogged", "score": 2 },
+          { "label": "Multiple drains are slow", "score": 3 }
         ]
       },
       {
         "id": "water-heater",
         "question": "How old is your water heater?",
         "options": [
-          {
-            "label": "Less than 5 years",
-            "score": 0
-          },
-          {
-            "label": "5 to 10 years",
-            "score": 1
-          },
-          {
-            "label": "10 to 15 years",
-            "score": 2
-          },
-          {
-            "label": "Over 15 years or not sure",
-            "score": 3
-          }
+          { "label": "Less than 5 years", "score": 0 },
+          { "label": "5 to 10 years", "score": 1 },
+          { "label": "10 to 15 years", "score": 2 },
+          { "label": "Over 15 years or not sure", "score": 3 }
         ]
       },
       {
         "id": "visible-issues",
         "question": "Do you see any water stains, rust, or corrosion on visible pipes?",
         "options": [
-          {
-            "label": "None at all",
-            "score": 0
-          },
-          {
-            "label": "Minor discoloration",
-            "score": 1
-          },
-          {
-            "label": "Visible rust or corrosion",
-            "score": 2
-          },
-          {
-            "label": "Active dripping or stains",
-            "score": 3
-          }
+          { "label": "None at all", "score": 0 },
+          { "label": "Minor discoloration", "score": 1 },
+          { "label": "Visible rust or corrosion", "score": 2 },
+          { "label": "Active dripping or stains", "score": 3 }
         ]
       },
       {
         "id": "water-bill",
         "question": "Has your water bill increased unexpectedly?",
         "options": [
-          {
-            "label": "No, it is consistent",
-            "score": 0
-          },
-          {
-            "label": "Slight increase",
-            "score": 1
-          },
-          {
-            "label": "Noticeable spike",
-            "score": 2
-          },
-          {
-            "label": "Doubled or more",
-            "score": 3
-          }
+          { "label": "No, it is consistent", "score": 0 },
+          { "label": "Slight increase", "score": 1 },
+          { "label": "Noticeable spike", "score": 2 },
+          { "label": "Doubled or more", "score": 3 }
         ]
       }
     ],
     "results": {
       "good": {
-        "range": [
-          0,
-          5
-        ],
+        "range": [0, 5],
         "title": "Your Plumbing Looks Healthy",
         "description": "No major red flags. We recommend an annual inspection to keep it that way.",
         "color": "success"
       },
       "fair": {
-        "range": [
-          6,
-          11
-        ],
+        "range": [6, 11],
         "title": "A Few Things to Watch",
         "description": "Your system has some early warning signs. A professional inspection can catch small problems before they become expensive ones.",
         "color": "warning"
       },
       "poor": {
-        "range": [
-          12,
-          18
-        ],
+        "range": [12, 18],
         "title": "Your Plumbing Needs Attention",
         "description": "Multiple risk factors detected. We strongly recommend scheduling an inspection.",
         "color": "emergency"
@@ -594,119 +516,23 @@ const siteConfig = {
   },
   "maintenancePlanner": {
     "months": [
-      {
-        "month": "January",
-        "tasks": [
-          "Insulate exposed pipes for freeze protection",
-          "Check water heater temperature (120°F recommended)",
-          "Test sump pump if applicable"
-        ],
-        "season": "winter"
-      },
-      {
-        "month": "February",
-        "tasks": [
-          "Inspect washing machine hoses for bulges or cracks",
-          "Clean faucet aerators to improve flow",
-          "Check under sinks for slow leaks"
-        ],
-        "season": "winter"
-      },
-      {
-        "month": "March",
-        "tasks": [
-          "Spring inspection of outdoor faucets and hose bibs",
-          "Check for signs of frozen pipe damage",
-          "Test water pressure (40-60 PSI is ideal)"
-        ],
-        "season": "spring"
-      },
-      {
-        "month": "April",
-        "tasks": [
-          "Flush water heater to remove sediment buildup",
-          "Inspect toilet flappers and fill valves",
-          "Check irrigation system for winter damage"
-        ],
-        "season": "spring"
-      },
-      {
-        "month": "May",
-        "tasks": [
-          "Clean gutters and downspouts",
-          "Inspect sewer cleanout caps",
-          "Test garbage disposal"
-        ],
-        "season": "spring"
-      },
-      {
-        "month": "June",
-        "tasks": [
-          "Check AC condensate drain line for clogs",
-          "Inspect visible pipes in basement/crawlspace",
-          "Test emergency water shutoff valve"
-        ],
-        "season": "summer"
-      },
-      {
-        "month": "July",
-        "tasks": [
-          "Monitor water bill for hidden leak indicators",
-          "Check toilet for silent leaks (food coloring test)",
-          "Inspect water softener if applicable"
-        ],
-        "season": "summer"
-      },
-      {
-        "month": "August",
-        "tasks": [
-          "Back-to-school plumbing check (higher usage coming)",
-          "Inspect dishwasher connections",
-          "Clean shower heads with vinegar solution"
-        ],
-        "season": "summer"
-      },
-      {
-        "month": "September",
-        "tasks": [
-          "Pre-winter water heater inspection",
-          "Check for outdoor faucet drips before cold weather",
-          "Inspect caulking around tubs and showers"
-        ],
-        "season": "fall"
-      },
-      {
-        "month": "October",
-        "tasks": [
-          "Disconnect and drain outdoor hoses",
-          "Insulate outdoor faucets and exposed pipes",
-          "Schedule annual plumbing inspection"
-        ],
-        "season": "fall"
-      },
-      {
-        "month": "November",
-        "tasks": [
-          "Know your main water shutoff valve location",
-          "Check for drafts near pipes in exterior walls",
-          "Pre-holiday drain cleaning"
-        ],
-        "season": "fall"
-      },
-      {
-        "month": "December",
-        "tasks": [
-          "Keep thermostat at 55°F+ even when away",
-          "Open cabinet doors during freezing weather",
-          "Keep emergency plumber number accessible"
-        ],
-        "season": "winter"
-      }
+      { "month": "January", "tasks": ["Insulate exposed pipes for freeze protection", "Check water heater temperature (120\u00b0F recommended)", "Test sump pump if applicable"], "season": "winter" },
+      { "month": "February", "tasks": ["Inspect washing machine hoses for bulges or cracks", "Clean faucet aerators to improve flow", "Check under sinks for slow leaks"], "season": "winter" },
+      { "month": "March", "tasks": ["Spring inspection of outdoor faucets and hose bibs", "Check for signs of frozen pipe damage", "Test water pressure (40-60 PSI is ideal)"], "season": "spring" },
+      { "month": "April", "tasks": ["Flush water heater to remove sediment buildup", "Inspect toilet flappers and fill valves", "Check irrigation system for winter damage"], "season": "spring" },
+      { "month": "May", "tasks": ["Clean gutters and downspouts", "Inspect sewer cleanout caps", "Test garbage disposal"], "season": "spring" },
+      { "month": "June", "tasks": ["Check AC condensate drain line for clogs", "Inspect visible pipes in basement/crawlspace", "Test emergency water shutoff valve"], "season": "summer" },
+      { "month": "July", "tasks": ["Monitor water bill for hidden leak indicators", "Check toilet for silent leaks (food coloring test)", "Inspect water softener if applicable"], "season": "summer" },
+      { "month": "August", "tasks": ["Back-to-school plumbing check (higher usage coming)", "Inspect dishwasher connections", "Clean shower heads with vinegar solution"], "season": "summer" },
+      { "month": "September", "tasks": ["Pre-winter water heater inspection", "Check for outdoor faucet drips before cold weather", "Inspect caulking around tubs and showers"], "season": "fall" },
+      { "month": "October", "tasks": ["Disconnect and drain outdoor hoses", "Insulate outdoor faucets and exposed pipes", "Schedule annual plumbing inspection"], "season": "fall" },
+      { "month": "November", "tasks": ["Know your main water shutoff valve location", "Check for drafts near pipes in exterior walls", "Pre-holiday drain cleaning"], "season": "fall" },
+      { "month": "December", "tasks": ["Keep thermostat at 55\u00b0F+ even when away", "Open cabinet doors during freezing weather", "Keep emergency plumber number accessible"], "season": "winter" }
     ]
   },
   "chatbot": {
     "name": "PlumbBot",
-    "greeting": "Hi! How can I assist you with your plumbing needs today?",
+    "greeting": "Hi! I am the A&E NYC Plumbing assistant. How can I help you today?",
     "quickReplies": [
       "Schedule a Service",
       "Emergency Plumbing",

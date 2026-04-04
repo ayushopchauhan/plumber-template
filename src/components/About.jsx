@@ -82,8 +82,8 @@ export default function About() {
                       </div>
                     ) : (
                       <span
-                        className="text-7xl font-bold text-[var(--color-blue)]"
-                        style={{ fontFamily: 'var(--font-heading)' }}
+                        className="text-7xl text-[var(--color-blue)]"
+                        style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}
                       >
                         {initials}
                       </span>
@@ -137,10 +137,10 @@ export default function About() {
                   className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {business.licenseNumber}
+                  {credentials.googleRating}★
                 </p>
                 <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
-                  License #
+                  Google Rating
                 </p>
               </div>
 
@@ -152,10 +152,10 @@ export default function About() {
                   className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {business.insuranceAmount}
+                  {credentials.yearsExperience}+
                 </p>
                 <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
-                  Insured
+                  Years Experience
                 </p>
               </div>
 
@@ -167,10 +167,10 @@ export default function About() {
                   className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {business.teamSize} Plumbers
+                  {credentials.reviewCount}+
                 </p>
                 <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
-                  Team Size
+                  Reviews
                 </p>
               </div>
             </div>

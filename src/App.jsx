@@ -9,6 +9,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import TrustBar from './components/TrustBar'
 import Stats from './components/Stats'
+import DynamicFavicon from './components/DynamicFavicon'
 
 // Below-fold: lazy-loaded for faster initial paint
 // Section order based on conversion funnel psychology:
@@ -47,6 +48,7 @@ export default function App() {
 
   return (
     <TrackingContext.Provider value={{ trackEmail, trackQuiz, trackCalculator, trackChat, sessionId }}>
+      <DynamicFavicon />
       <Navbar />
 
       {/* PHASE 1: ATTENTION CAPTURE */}
