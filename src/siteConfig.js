@@ -15,12 +15,13 @@ const siteConfig = {
     "insuranceProvider": "",
     "insuranceAmount": "",
     "photoUrl": "",
+    "logoUrl": "https://plumbingnyc.com/wp-content/uploads/2021/04/PlumbingNYC.png",
     "teamSize": 0
   },
   "contact": {
     "phone": "+16465807524",
     "phoneDisplay": "646-580-7524",
-    "email": "",
+    "email": "info@plumbingnyc.com",
     "address": "510 W 45th St",
     "city": "New York",
     "state": "NY",
