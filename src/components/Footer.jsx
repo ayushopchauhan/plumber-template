@@ -16,8 +16,13 @@ const socialIcons = {
 }
 
 export default function Footer() {
-  const { business, contact, social, credentials } = config
+  const { business = {}, contact = {}, credentials = {} } = config
+  const social = config.social && typeof config.social === 'object' ? config.social : {}
   const currentYear = new Date().getFullYear()
+
+  const hasRealSocialLinks = Object.entries(social).some(
+    ([, url]) => url && typeof url === 'string' && url.trim() && !url.includes('example.com') && !url.includes('placeholder')
+  )
 
   return (
     <>
@@ -37,19 +42,19 @@ export default function Footer() {
                 className="text-lg font-bold text-[var(--color-cream)] mb-2"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
-                {business.name}
+                {business.name || ''}
               </h3>
               <p
                 className="text-sm text-[var(--color-cream)]/70 leading-relaxed mb-4"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                {business.tagline}
+                {business.tagline || ''}
               </p>
               {/* Social Icons - only show if real URLs exist */}
-              {Object.entries(social).some(([, url]) => url && url.trim() && !url.includes('example.com') && !url.includes('placeholder')) && (
+              {hasRealSocialLinks && (
                 <div className="flex gap-2">
                   {Object.entries(social)
-                    .filter(([, url]) => url && url.trim() && !url.includes('example.com') && !url.includes('placeholder'))
+                    .filter(([, url]) => url && typeof url === 'string' && url.trim() && !url.includes('example.com') && !url.includes('placeholder'))
                     .map(([platform, url]) => {
                       const Icon = socialIcons[platform] || ExternalLink
                       return (
@@ -110,30 +115,36 @@ export default function Footer() {
                 Contact
               </h4>
               <ul className="space-y-3">
-                <li>
-                  <a
-                    href={`tel:${contact.phone}`}
-                    className="flex items-center gap-2 text-sm text-[var(--color-cream)]/70 hover:text-[var(--color-blue)] transition-colors"
-                    style={{ fontFamily: 'var(--font-body)' }}
-                  >
-                    <Phone className="w-4 h-4 text-[var(--color-blue)]/60" />
-                    {contact.phoneDisplay}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={`mailto:${contact.email}`}
-                    className="flex items-center gap-2 text-sm text-[var(--color-cream)]/70 hover:text-[var(--color-blue)] transition-colors"
-                    style={{ fontFamily: 'var(--font-body)' }}
-                  >
-                    <Mail className="w-4 h-4 text-[var(--color-blue)]/60" />
-                    {contact.email}
-                  </a>
-                </li>
-                <li className="flex items-start gap-2 text-sm text-[var(--color-cream)]/70" style={{ fontFamily: 'var(--font-body)' }}>
-                  <MapPin className="w-4 h-4 text-[var(--color-blue)]/60 flex-shrink-0 mt-0.5" />
-                  {contact.fullAddress}
-                </li>
+                {contact.phone && (
+                  <li>
+                    <a
+                      href={`tel:${contact.phone}`}
+                      className="flex items-center gap-2 text-sm text-[var(--color-cream)]/70 hover:text-[var(--color-blue)] transition-colors"
+                      style={{ fontFamily: 'var(--font-body)' }}
+                    >
+                      <Phone className="w-4 h-4 text-[var(--color-blue)]/60" />
+                      {contact.phoneDisplay || contact.phone}
+                    </a>
+                  </li>
+                )}
+                {contact.email && (
+                  <li>
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className="flex items-center gap-2 text-sm text-[var(--color-cream)]/70 hover:text-[var(--color-blue)] transition-colors"
+                      style={{ fontFamily: 'var(--font-body)' }}
+                    >
+                      <Mail className="w-4 h-4 text-[var(--color-blue)]/60" />
+                      {contact.email}
+                    </a>
+                  </li>
+                )}
+                {contact.fullAddress && (
+                  <li className="flex items-start gap-2 text-sm text-[var(--color-cream)]/70" style={{ fontFamily: 'var(--font-body)' }}>
+                    <MapPin className="w-4 h-4 text-[var(--color-blue)]/60 flex-shrink-0 mt-0.5" />
+                    {contact.fullAddress}
+                  </li>
+                )}
               </ul>
             </div>
 
@@ -146,10 +157,9 @@ export default function Footer() {
                 Credentials
               </h4>
               <ul className="space-y-2.5 text-sm text-[var(--color-cream)]/70" style={{ fontFamily: 'var(--font-body)' }}>
-                {business.licenseNumber && <li>Licensed: {business.licenseNumber}</li>}
-                {!business.licenseNumber && <li>Fully Licensed & Insured</li>}
+                {business.licenseNumber ? <li>Licensed: {business.licenseNumber}</li> : <li>Fully Licensed &amp; Insured</li>}
                 {business.insuranceAmount && <li>Insured: {business.insuranceAmount} General Liability</li>}
-                <li>{credentials.yearsExperience}+ Years in Business</li>
+                {credentials.yearsExperience != null && <li>{credentials.yearsExperience}+ Years in Business</li>}
                 {credentials.guaranteeDays
                   ? <li>{credentials.guaranteeDays}-Day Money-Back Guarantee</li>
                   : credentials.warrantyYears
@@ -169,7 +179,7 @@ export default function Footer() {
               className="text-xs text-[var(--color-cream)]/40"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              &copy; {currentYear} {business.name}. All rights reserved.
+              &copy; {currentYear} {business.name || ''}. All rights reserved.
             </p>
             <p
               className="text-xs text-[var(--color-cream)]/30"
