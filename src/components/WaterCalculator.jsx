@@ -6,7 +6,7 @@ import { WaterDropPattern } from './PlumbingDecorations'
 const AVG_HOUSEHOLD_ANNUAL_WASTE = 380
 
 export default function WaterCalculator() {
-  const issues = config.waterCalculator.issues
+  const issues = config.waterCalculator?.issues || []
   const [checked, setChecked] = useState(() => new Array(issues.length).fill(false))
 
   const toggleIssue = (index) => {
