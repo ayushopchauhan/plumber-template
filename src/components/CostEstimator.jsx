@@ -78,15 +78,13 @@ export default function CostEstimator() {
 
 function CostEstimatorInner({ services }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
-
-  if (services.length === 0) return null
   const [complexity, setComplexity] = useState(2)
 
-  const selected = services[selectedIndex]
+  const selected = services[selectedIndex] || services[0]
 
   const estimate = useMemo(() => {
-    const base = selected.basePrice
-    const max = selected.maxPrice
+    const base = selected?.basePrice ?? 0
+    const max = selected?.maxPrice ?? base
     return Math.round(base + (max - base) * ((complexity - 1) / 2))
   }, [selected, complexity])
 
@@ -101,6 +99,9 @@ function CostEstimatorInner({ services }) {
     { label: 'Parts', pct: 25, color: '#38BDF8', amount: partsAmount },
     { label: 'Warranty', pct: 15, color: '#0284C7', amount: warrantyAmount },
   ]
+
+  // factors may not exist in GPT-generated config; guard it
+  const factors = selected?.factors || []
 
   return (
     <section className="section-light py-16 sm:py-20 lg:py-24">
@@ -143,7 +144,7 @@ function CostEstimatorInner({ services }) {
               <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                 {services.map((svc, i) => (
                   <button
-                    key={svc.name}
+                    key={svc.name || i}
                     onClick={() => setSelectedIndex(i)}
                     className={`px-3.5 py-3 sm:py-3.5 rounded-xl text-left text-sm font-medium transition-all duration-200 cursor-pointer ${
                       selectedIndex === i
@@ -194,27 +195,29 @@ function CostEstimatorInner({ services }) {
               </div>
             </div>
 
-            {/* Price factors */}
-            <div className="p-5 rounded-2xl card-light">
-              <h4
-                className="text-[var(--color-blue)] text-xs font-bold uppercase tracking-wider mb-3"
-                style={{ fontFamily: 'var(--font-heading)' }}
-              >
-                Price Depends On
-              </h4>
-              <ul className="space-y-2">
-                {selected.factors.map((factor, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-2.5 text-[var(--color-light-muted)] text-sm"
-                    style={{ fontFamily: 'var(--font-body)' }}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-blue)] shrink-0 mt-1.5" />
-                    {factor}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Price factors - only shown if factors exist */}
+            {factors.length > 0 && (
+              <div className="p-5 rounded-2xl card-light">
+                <h4
+                  className="text-[var(--color-blue)] text-xs font-bold uppercase tracking-wider mb-3"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
+                  Price Depends On
+                </h4>
+                <ul className="space-y-2">
+                  {factors.map((factor, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2.5 text-[var(--color-light-muted)] text-sm"
+                      style={{ fontFamily: 'var(--font-body)' }}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-blue)] shrink-0 mt-1.5" />
+                      {factor}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Right: price display + donut + comparison */}
@@ -226,14 +229,16 @@ function CostEstimatorInner({ services }) {
                   className="text-[var(--color-light-text)] font-bold text-xl sm:text-2xl mb-1"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {selected.name}
+                  {selected?.name}
                 </h3>
-                <span
-                  className="text-[var(--color-light-muted)] text-sm"
-                  style={{ fontFamily: 'var(--font-body)' }}
-                >
-                  {selected.unit}
-                </span>
+                {selected?.unit && (
+                  <span
+                    className="text-[var(--color-light-muted)] text-sm"
+                    style={{ fontFamily: 'var(--font-body)' }}
+                  >
+                    {selected.unit}
+                  </span>
+                )}
               </div>
 
               {/* Donut chart */}
@@ -302,7 +307,7 @@ function CostEstimatorInner({ services }) {
                   className="text-[var(--color-light-muted)] text-xs"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
-                  Full range: ${selected.basePrice.toLocaleString()} &ndash; ${selected.maxPrice.toLocaleString()}
+                  Full range: ${(selected?.basePrice ?? 0).toLocaleString()} &ndash; ${(selected?.maxPrice ?? 0).toLocaleString()}
                 </span>
               </div>
 
