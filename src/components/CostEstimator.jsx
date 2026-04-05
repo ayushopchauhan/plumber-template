@@ -72,6 +72,11 @@ function DonutChart({ total, segments }) {
 
 export default function CostEstimator() {
   const services = config.costEstimator?.services || []
+  if (services.length === 0) return null
+  return <CostEstimatorInner services={services} />
+}
+
+function CostEstimatorInner({ services }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   if (services.length === 0) return null
