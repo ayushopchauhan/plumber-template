@@ -2,9 +2,27 @@ import { useState, useRef, useEffect } from 'react'
 import config from '../siteConfig'
 import { MessageCircle, X, Send, Phone } from 'lucide-react'
 
+const chatbot = config.chatbot || {}
+const contact = config.contact || {}
+
+const greeting = typeof chatbot.greeting === 'string'
+  ? chatbot.greeting
+  : 'Hi! How can I help you today?'
+
+const chatbotName = typeof chatbot.name === 'string' ? chatbot.name : 'Chat Support'
+
+const quickReplies = Array.isArray(chatbot.quickReplies)
+  ? chatbot.quickReplies.filter(r => typeof r === 'string')
+  : []
+
+const phoneDisplay = typeof contact.phoneDisplay === 'string' ? contact.phoneDisplay : (typeof contact.phone === 'string' ? contact.phone : '')
+const phone = typeof contact.phone === 'string' ? contact.phone : ''
+const city = typeof contact.city === 'string' ? contact.city : 'your area'
+const emergencyPhoneDisplay = typeof contact.emergencyPhoneDisplay === 'string' ? contact.emergencyPhoneDisplay : phoneDisplay
+
 const BOT_RESPONSES = {
   emergency: {
-    text: `If you have an active emergency (flooding, burst pipe, sewage backup), call us immediately at ${config.contact.emergencyPhoneDisplay}. We dispatch 24/7 and typically arrive in 30 to 60 minutes.`,
+    text: `If you have an active emergency (flooding, burst pipe, sewage backup), call us immediately at ${emergencyPhoneDisplay}. We dispatch 24/7 and typically arrive in 30 to 60 minutes.`,
     showCall: true,
   },
   cost: {
@@ -12,7 +30,7 @@ const BOT_RESPONSES = {
     scrollTo: 'estimator',
   },
   area: {
-    text: `We serve the greater ${config.contact.city} area including Downtown, North, South, East, and West ${config.contact.city}, plus Georgetown. Check the "Areas We Serve" section for response times in your neighborhood.`,
+    text: `We serve the greater ${city} area including Downtown, North, South, East, and West ${city}, plus Georgetown. Check the "Areas We Serve" section for response times in your neighborhood.`,
     scrollTo: 'areas',
   },
   warranty: {
@@ -42,7 +60,7 @@ function matchResponse(input) {
     return BOT_RESPONSES.book
   }
   return {
-    text: `I would recommend speaking with our team directly. Call ${config.contact.phoneDisplay} or scroll down to our contact form.`,
+    text: `I would recommend speaking with our team directly. Call ${phoneDisplay} or scroll down to our contact form.`,
     showCall: true,
     scrollTo: 'contact',
   }
@@ -51,7 +69,7 @@ function matchResponse(input) {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { role: 'bot', text: config.chatbot.greeting },
+    { role: 'bot', text: greeting },
   ])
   const [input, setInput] = useState('')
   const messagesEndRef = useRef(null)
@@ -137,7 +155,7 @@ export default function Chatbot() {
                   className="text-sm font-bold text-white"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {config.chatbot.name}
+                  {chatbotName}
                 </p>
                 <p className="text-xs text-white/70">Online</p>
               </div>
@@ -164,14 +182,14 @@ export default function Chatbot() {
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
                   {msg.text}
-                  {msg.showCall && (
+                  {msg.showCall && phone && (
                     <a
-                      href={`tel:${config.contact.phone}`}
+                      href={`tel:${phone}`}
                       className="mt-2 flex items-center gap-2 text-xs font-semibold text-white bg-[var(--color-accent)] hover:bg-[var(--color-accent-light)] px-3 py-2 rounded-lg transition-colors"
                       style={{ fontFamily: 'var(--font-heading)' }}
                     >
                       <Phone className="w-3.5 h-3.5" />
-                      Call {config.contact.phoneDisplay}
+                      Call {phoneDisplay}
                     </a>
                   )}
                 </div>
@@ -181,9 +199,9 @@ export default function Chatbot() {
           </div>
 
           {/* Quick Replies (show only when few messages) */}
-          {messages.length <= 2 && (
+          {messages.length <= 2 && quickReplies.length > 0 && (
             <div className="px-4 pb-2 flex flex-wrap gap-2">
-              {config.chatbot.quickReplies.map((reply, i) => (
+              {quickReplies.map((reply, i) => (
                 <button
                   key={i}
                   onClick={() => handleSend(reply)}
