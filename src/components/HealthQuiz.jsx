@@ -33,11 +33,15 @@ function getResultKey(score, results) {
 }
 
 export default function HealthQuiz() {
-  const questions = config.healthQuiz?.questions || []; const results = config.healthQuiz?.results || {}
+  const questions = config.healthQuiz?.questions || []
+  const results = config.healthQuiz?.results || {}
+  if (questions.length === 0 || !results.good || !results.fair || !results.poor) return null
+  return <HealthQuizInner questions={questions} results={results} />
+}
+
+function HealthQuizInner({ questions, results }) {
   const totalQuestions = questions.length
   const maxScore = totalQuestions * 3
-
-  if (totalQuestions === 0 || \!results.good || \!results.fair || \!results.poor) return null
 
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState(Array(totalQuestions).fill(null))
