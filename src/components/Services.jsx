@@ -4,8 +4,17 @@ import { WrenchWatermark } from './PlumbingDecorations'
 
 const iconMap = { Siren, Waves, Flame, Wrench, Droplets, Construction }
 
+function safeStr(val, fallback = '') {
+  if (val == null) return fallback
+  if (typeof val === 'string') return val
+  if (typeof val === 'number') return String(val)
+  return fallback
+}
+
 export default function Services() {
-  const { services } = config
+  const services = Array.isArray(config.services) ? config.services : []
+
+  if (services.length === 0) return null
 
   return (
     <section id="services" className="section-light grain-overlay py-16 md:py-20 lg:py-28 px-4 sm:px-6 relative overflow-hidden">
@@ -37,7 +46,14 @@ export default function Services() {
         {/* Service grid */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-5 lg:gap-6 stagger-children">
           {services.map((service, i) => {
-            const Icon = iconMap[service.icon]
+            if (!service || typeof service !== 'object') return null
+            const iconKey = safeStr(service.icon)
+            const Icon = iconMap[iconKey] || null
+            const name = safeStr(service.name, 'Service')
+            const description = safeStr(service.description)
+            const priceRange = safeStr(service.priceRange)
+            const popular = Boolean(service.popular)
+
             return (
               <a
                 key={i}
@@ -45,7 +61,7 @@ export default function Services() {
                 className="reveal group relative block rounded-xl card-gradient-border p-6 lg:p-7 cursor-pointer w-full md:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-1rem)]"
               >
                 {/* Popular badge */}
-                {service.popular && (
+                {popular && (
                   <span className="absolute top-4 right-4 inline-flex items-center rounded-full bg-[var(--color-accent)] px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-white">
                     Popular
                   </span>
@@ -61,26 +77,28 @@ export default function Services() {
                   className="text-lg font-semibold text-[var(--color-light-text)] mb-2 group-hover:text-[var(--color-blue)] transition-colors"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {service.name}
+                  {name}
                 </h3>
 
                 {/* Description */}
                 <p className="text-sm text-[var(--color-light-muted)] leading-relaxed mb-4">
-                  {service.description}
+                  {description}
                 </p>
 
                 {/* Price range */}
-                <div className="flex items-center justify-between border-t border-[var(--color-light-border)] pt-4">
-                  <span className="text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
-                    Starting from
-                  </span>
-                  <span
-                    className="text-sm font-semibold text-[var(--color-blue)]"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
-                    {service.priceRange}
-                  </span>
-                </div>
+                {priceRange && (
+                  <div className="flex items-center justify-between border-t border-[var(--color-light-border)] pt-4">
+                    <span className="text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
+                      Starting from
+                    </span>
+                    <span
+                      className="text-sm font-semibold text-[var(--color-blue)]"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {priceRange}
+                    </span>
+                  </div>
+                )}
               </a>
             )
           })}
