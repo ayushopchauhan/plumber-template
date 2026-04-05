@@ -10,7 +10,10 @@ const iconMap = {
 }
 
 export default function TrustBar() {
-  const items = config.trustBar
+  const rawItems = config.trustBar
+  const items = Array.isArray(rawItems) ? rawItems.filter(item => item && typeof item === 'object') : []
+
+  if (items.length === 0) return null
 
   return (
     <section
@@ -24,10 +27,12 @@ export default function TrustBar() {
       {/* Desktop: Single row, evenly spaced */}
       <div className="hidden lg:flex max-w-7xl mx-auto relative z-10">
         {items.map((item, i) => {
-          const Icon = iconMap[item.icon] || Shield
+          const iconKey = typeof item.icon === 'string' ? item.icon : ''
+          const Icon = iconMap[iconKey] || Shield
+          const label = typeof item.label === 'string' ? item.label : (item.label != null ? String(item.label) : '')
           return (
             <div
-              key={item.label}
+              key={i}
               className="flex-1 flex items-center justify-center gap-3 py-5"
               style={{
                 borderRight: i < items.length - 1
@@ -43,7 +48,7 @@ export default function TrustBar() {
                   color: '#111827',
                 }}
               >
-                {item.label}
+                {label}
               </span>
             </div>
           )
@@ -52,11 +57,13 @@ export default function TrustBar() {
 
       {/* Tablet: centered flex wrap */}
       <div className="hidden md:flex lg:hidden flex-wrap justify-center max-w-3xl mx-auto py-4 px-6 gap-y-3 relative z-10">
-        {items.map((item) => {
-          const Icon = iconMap[item.icon] || Shield
+        {items.map((item, i) => {
+          const iconKey = typeof item.icon === 'string' ? item.icon : ''
+          const Icon = iconMap[iconKey] || Shield
+          const label = typeof item.label === 'string' ? item.label : (item.label != null ? String(item.label) : '')
           return (
             <div
-              key={item.label}
+              key={i}
               className="flex items-center justify-center gap-2.5 py-2 px-5"
             >
               <Icon className="w-4.5 h-4.5 shrink-0" style={{ color: 'var(--color-blue)' }} />
@@ -67,7 +74,7 @@ export default function TrustBar() {
                   color: '#111827',
                 }}
               >
-                {item.label}
+                {label}
               </span>
             </div>
           )
@@ -78,10 +85,12 @@ export default function TrustBar() {
       <div className="md:hidden overflow-x-auto scrollbar-hide relative z-10">
         <div className="flex items-center gap-0 min-w-max">
           {items.map((item, i) => {
-            const Icon = iconMap[item.icon] || Shield
+            const iconKey = typeof item.icon === 'string' ? item.icon : ''
+            const Icon = iconMap[iconKey] || Shield
+            const label = typeof item.label === 'string' ? item.label : (item.label != null ? String(item.label) : '')
             return (
               <div
-                key={item.label}
+                key={i}
                 className="flex items-center gap-2.5 px-5 py-4 shrink-0"
                 style={{
                   borderRight: i < items.length - 1
@@ -97,7 +106,7 @@ export default function TrustBar() {
                     color: '#111827',
                   }}
                 >
-                  {item.label}
+                  {label}
                 </span>
               </div>
             )
