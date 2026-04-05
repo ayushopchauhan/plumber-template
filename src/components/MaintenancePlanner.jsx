@@ -39,8 +39,10 @@ const seasonLabels = {
 const currentMonthIndex = new Date().getMonth()
 
 export default function MaintenancePlanner() {
-  const { months } = config.maintenancePlanner
+  const months = config.maintenancePlanner?.months || []
   const [selectedMonth, setSelectedMonth] = useState(currentMonthIndex)
+
+  if (months.length === 0) return null
   const [viewMode, setViewMode] = useState('grid')
   const [completedTasks, setCompletedTasks] = useState({})
 
