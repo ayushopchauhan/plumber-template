@@ -40,6 +40,11 @@ const currentMonthIndex = new Date().getMonth()
 
 export default function MaintenancePlanner() {
   const months = config.maintenancePlanner?.months || []
+  if (months.length === 0) return null
+  return <MaintenancePlannerInner months={months} />
+}
+
+function MaintenancePlannerInner({ months }) {
   const [selectedMonth, setSelectedMonth] = useState(currentMonthIndex)
 
   if (months.length === 0) return null
