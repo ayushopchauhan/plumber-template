@@ -33,7 +33,7 @@ function getResultKey(score, results) {
 }
 
 export default function HealthQuiz() {
-  const { questions, results } = config.healthQuiz
+  const questions = config.healthQuiz?.questions || []; const results = config.healthQuiz?.results || {}
   const totalQuestions = questions.length
   const maxScore = totalQuestions * 3
 
