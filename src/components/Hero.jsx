@@ -2,11 +2,28 @@ import config from '../siteConfig'
 import { Phone, ChevronDown, AlertTriangle } from 'lucide-react'
 import { WaterDropPattern } from './PlumbingDecorations'
 
+function safeStr(val, fallback = '') {
+  if (val == null) return fallback
+  if (typeof val === 'string') return val
+  if (typeof val === 'number') return String(val)
+  return fallback
+}
+
 export default function Hero() {
-  const { hero, contact, business } = config
+  const hero = config.hero && typeof config.hero === 'object' ? config.hero : {}
+  const contact = config.contact && typeof config.contact === 'object' ? config.contact : {}
+  const business = config.business && typeof config.business === 'object' ? config.business : {}
+
+  const headline = safeStr(hero.headline, 'Professional Plumbing Services')
+  const subheadline = safeStr(hero.subheadline)
+  const ctaText = safeStr(hero.ctaText, 'Get a Free Quote')
+  const emergencyCtaText = safeStr(hero.emergencyCtaText, 'Emergency? Call Now')
+  const urgencyBadge = safeStr(hero.urgencyBadge)
+  const backgroundImage = safeStr(hero.backgroundImage)
+  const emergencyPhone = safeStr(contact.emergencyPhone || contact.phone)
 
   // Split headline at the period for two-tone styling
-  const parts = (hero.headline || 'Professional Plumbing Services').split('.')
+  const parts = headline.split('.')
   const firstPart = parts[0] + '.'
   const secondPart = parts.slice(1).join('.').trim()
 
@@ -18,7 +35,7 @@ export default function Hero() {
       {/* Background Image with Rich Multi-Stop Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${hero.backgroundImage})` }}
+        style={{ backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined }}
       >
         {/* Rich gradient: deep at top for navbar, opens up in middle, fades to light at bottom */}
         <div
@@ -93,22 +110,26 @@ export default function Hero() {
           </h1>
 
           {/* Subheadline */}
-          <p
-            className="reveal text-base sm:text-lg md:text-xl text-[var(--color-cream-dark)]/80 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            {hero.subheadline}
-          </p>
+          {subheadline && (
+            <p
+              className="reveal text-base sm:text-lg md:text-xl text-[var(--color-cream-dark)]/80 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed"
+              style={{ fontFamily: 'var(--font-body)' }}
+            >
+              {subheadline}
+            </p>
+          )}
 
           {/* Mobile Urgency Badge */}
-          <div className="reveal md:hidden mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[var(--color-emergency)]/10 border border-[var(--color-emergency)]/20">
-              <AlertTriangle className="w-4 h-4 text-[var(--color-emergency)] shrink-0" />
-              <span className="text-[var(--color-emergency)] text-xs font-medium">
-                {hero.urgencyBadge}
-              </span>
+          {urgencyBadge && (
+            <div className="reveal md:hidden mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[var(--color-emergency)]/10 border border-[var(--color-emergency)]/20">
+                <AlertTriangle className="w-4 h-4 text-[var(--color-emergency)] shrink-0" />
+                <span className="text-[var(--color-emergency)] text-xs font-medium">
+                  {urgencyBadge}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* CTAs */}
           <div className="reveal flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
@@ -118,24 +139,28 @@ export default function Hero() {
               className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-[var(--color-blue)]/40 text-[var(--color-blue)] hover:bg-[var(--color-blue)]/10 hover:border-[var(--color-blue)] font-bold text-base transition-all duration-200"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              {hero.ctaText}
+              {ctaText}
             </a>
 
             {/* Emergency Call Now - Solid Orange */}
-            <a
-              href={`tel:${contact.emergencyPhone}`}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-white font-bold text-base transition-all duration-200 emergency-pulse hover:shadow-lg hover:shadow-[var(--color-accent)]/25 btn-shimmer"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              <Phone className="w-5 h-5" />
-              {hero.emergencyCtaText}
-            </a>
+            {emergencyPhone && (
+              <a
+                href={`tel:${emergencyPhone}`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-white font-bold text-base transition-all duration-200 emergency-pulse hover:shadow-lg hover:shadow-[var(--color-accent)]/25 btn-shimmer"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                <Phone className="w-5 h-5" />
+                {emergencyCtaText}
+              </a>
+            )}
           </div>
 
           {/* Desktop Urgency Line */}
-          <p className="hidden md:block reveal mt-6 text-sm text-[var(--color-cream-dark)]/50">
-            {hero.urgencyBadge}
-          </p>
+          {urgencyBadge && (
+            <p className="hidden md:block reveal mt-6 text-sm text-[var(--color-cream-dark)]/50">
+              {urgencyBadge}
+            </p>
+          )}
         </div>
 
         {/* Animated pulsing blue line below glass card */}
