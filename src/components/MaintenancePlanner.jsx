@@ -35,6 +35,11 @@ const seasonLabels = {
   summer: 'Summer',
   fall: 'Fall',
 }
+// GPT generates tasks as objects {task, description, priority} or as plain strings
+const getTaskText = (t) => typeof t === 'string' ? t : (t.task || t.description || String(t))
+const getTaskDescription = (t) => typeof t === 'string' ? null : (t.description || null)
+const getTaskPriority = (t) => typeof t === 'string' ? null : (t.priority || null)
+
 
 const currentMonthIndex = new Date().getMonth()
 
@@ -318,7 +323,7 @@ function MaintenancePlannerInner({ months }) {
                               <span
                                 className={`text-sm leading-relaxed transition-all ${isDone ? 'text-[var(--color-light-muted)] line-through opacity-50' : 'text-[var(--color-light-text)]'}`}
                               >
-                                {task}
+                                {getTaskText(task)}
                               </span>
                             </button>
                           )
@@ -417,7 +422,8 @@ function DetailPanel({ month, monthIndex, completedTasks, onToggleTask }) {
               <span
                 className={`text-sm leading-relaxed transition-all ${isDone ? 'text-[var(--color-light-muted)] line-through opacity-50' : 'text-[var(--color-light-text)] group-hover:text-[var(--color-light-text)]'}`}
               >
-                {task}
+                {getTaskText(task)}
+                {getTaskDescription(task) && <span className="block text-xs text-[var(--color-light-muted)] mt-0.5">{getTaskDescription(task)}</span>}
               </span>
             </button>
           )
@@ -504,7 +510,8 @@ function MobileDetail({ month, monthIndex, completedTasks, onToggleTask }) {
               <span
                 className={`text-sm leading-relaxed pt-0.5 transition-all ${isDone ? 'text-[var(--color-light-muted)] line-through opacity-50' : 'text-[var(--color-light-text)]'}`}
               >
-                {task}
+                {getTaskText(task)}
+                {getTaskDescription(task) && <span className="block text-xs text-[var(--color-light-muted)] mt-0.5">{getTaskDescription(task)}</span>}
               </span>
             </button>
           )
