@@ -37,6 +37,8 @@ export default function HealthQuiz() {
   const totalQuestions = questions.length
   const maxScore = totalQuestions * 3
 
+  if (totalQuestions === 0 || \!results.good || \!results.fair || \!results.poor) return null
+
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState(Array(totalQuestions).fill(null))
   const [showResults, setShowResults] = useState(false)
