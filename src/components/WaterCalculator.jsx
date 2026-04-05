@@ -5,8 +5,23 @@ import { WaterDropPattern } from './PlumbingDecorations'
 
 const AVG_HOUSEHOLD_ANNUAL_WASTE = 380
 
+function safeNum(val, fallback = 0) {
+  const n = Number(val)
+  return isFinite(n) ? n : fallback
+}
+
+function safeStr(val, fallback = '') {
+  if (val == null) return fallback
+  if (typeof val === 'string') return val
+  return fallback
+}
+
 export default function WaterCalculator() {
-  const issues = config.waterCalculator?.issues || []
+  const rawIssues = config.waterCalculator?.issues
+  const issues = Array.isArray(rawIssues)
+    ? rawIssues.filter(issue => issue && typeof issue === 'object')
+    : []
+
   const [checked, setChecked] = useState(() => new Array(issues.length).fill(false))
 
   const toggleIssue = (index) => {
@@ -23,8 +38,8 @@ export default function WaterCalculator() {
     let count = 0
     issues.forEach((issue, i) => {
       if (checked[i]) {
-        monthly += issue.monthlyWaste
-        gallons += issue.gallonsPerDay
+        monthly += safeNum(issue.monthlyWaste)
+        gallons += safeNum(issue.gallonsPerDay)
         count++
       }
     })
@@ -35,6 +50,8 @@ export default function WaterCalculator() {
       checkedCount: count,
     }
   }, [checked, issues])
+
+  if (issues.length === 0) return null
 
   const fillPercent = Math.min(100, (annualWaste / 2500) * 100)
 
@@ -71,60 +88,68 @@ export default function WaterCalculator() {
           {/* Left: checkboxes */}
           <div className="reveal-left">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-3">
-              {issues.map((issue, i) => (
-                <button
-                  key={issue.name}
-                  onClick={() => toggleIssue(i)}
-                  className={`group flex items-start gap-4 p-4 sm:p-5 rounded-2xl card-dark text-left transition-all duration-200 cursor-pointer ${
-                    checked[i]
-                      ? 'shadow-[0_0_20px_rgba(220,38,38,0.1)]'
-                      : ''
-                  }`}
-                  style={checked[i] ? { borderColor: 'rgba(220, 38, 38, 0.35)', background: 'rgba(220, 38, 38, 0.06)' } : {}}
-                >
-                  {/* Custom checkbox */}
-                  <div
-                    className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200 ${
-                      checked[i]
-                        ? 'bg-[var(--color-emergency)] border-[var(--color-emergency)]'
-                        : 'border-[var(--color-cream)]/20 group-hover:border-[var(--color-cream)]/40'
-                    }`}
-                  >
-                    {checked[i] && (
-                      <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    )}
-                  </div>
+              {issues.map((issue, i) => {
+                const name = safeStr(issue.name, `Issue ${i + 1}`)
+                const monthlyWasteCost = safeNum(issue.monthlyWaste)
+                const gallonsPerDay = safeNum(issue.gallonsPerDay)
 
-                  <div className="flex-1 min-w-0">
-                    <span
-                      className={`font-semibold text-sm sm:text-base block transition-colors ${
-                        checked[i] ? 'text-[var(--color-cream)]' : 'text-[var(--color-cream)]/70'
+                return (
+                  <button
+                    key={i}
+                    onClick={() => toggleIssue(i)}
+                    className={`group flex items-start gap-4 p-4 sm:p-5 rounded-2xl card-dark text-left transition-all duration-200 cursor-pointer ${
+                      checked[i]
+                        ? 'shadow-[0_0_20px_rgba(220,38,38,0.1)]'
+                        : ''
+                    }`}
+                    style={checked[i] ? { borderColor: 'rgba(220, 38, 38, 0.35)', background: 'rgba(220, 38, 38, 0.06)' } : {}}
+                  >
+                    {/* Custom checkbox */}
+                    <div
+                      className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200 ${
+                        checked[i]
+                          ? 'bg-[var(--color-emergency)] border-[var(--color-emergency)]'
+                          : 'border-[var(--color-cream)]/20 group-hover:border-[var(--color-cream)]/40'
                       }`}
-                      style={{ fontFamily: 'var(--font-heading)' }}
                     >
-                      {issue.name}
-                    </span>
-                    <div className="flex items-center gap-3 mt-1.5">
-                      <span
-                        className="text-[var(--color-emergency)] text-xs font-semibold"
-                        style={{ fontFamily: 'var(--font-body)' }}
-                      >
-                        ${issue.monthlyWaste}/mo
-                      </span>
-                      {issue.gallonsPerDay > 0 && (
-                        <span
-                          className="text-[var(--color-cream)]/40 text-xs"
-                          style={{ fontFamily: 'var(--font-body)' }}
-                        >
-                          {issue.gallonsPerDay} gal/day
-                        </span>
+                      {checked[i] && (
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
                       )}
                     </div>
-                  </div>
-                </button>
-              ))}
+
+                    <div className="flex-1 min-w-0">
+                      <span
+                        className={`font-semibold text-sm sm:text-base block transition-colors ${
+                          checked[i] ? 'text-[var(--color-cream)]' : 'text-[var(--color-cream)]/70'
+                        }`}
+                        style={{ fontFamily: 'var(--font-heading)' }}
+                      >
+                        {name}
+                      </span>
+                      <div className="flex items-center gap-3 mt-1.5">
+                        {monthlyWasteCost > 0 && (
+                          <span
+                            className="text-[var(--color-emergency)] text-xs font-semibold"
+                            style={{ fontFamily: 'var(--font-body)' }}
+                          >
+                            ${monthlyWasteCost}/mo
+                          </span>
+                        )}
+                        {gallonsPerDay > 0 && (
+                          <span
+                            className="text-[var(--color-cream)]/40 text-xs"
+                            style={{ fontFamily: 'var(--font-body)' }}
+                          >
+                            {gallonsPerDay} gal/day
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </button>
+                )
+              })}
             </div>
           </div>
 
