@@ -6,7 +6,7 @@ export default function Hero() {
   const { hero, contact, business } = config
 
   // Split headline at the period for two-tone styling
-  const parts = hero.headline.split('.')
+  const parts = (hero.headline || 'Professional Plumbing Services').split('.')
   const firstPart = parts[0] + '.'
   const secondPart = parts.slice(1).join('.').trim()
 
