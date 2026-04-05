@@ -18,6 +18,8 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false)
 
   const { contact, services, business } = config
+  // Guard: services may be undefined if GPT omits it
+  const serviceList = services || []
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target
@@ -68,7 +70,7 @@ export default function Contact() {
         {/* Emergency Banner */}
         <div className="reveal mb-10 md:mb-14">
           <a
-            href={`tel:${contact.emergencyPhone}`}
+            href={`tel:${contact?.emergencyPhone || contact?.phone}`}
             className="emergency-pulse flex items-center justify-center gap-3 py-4 px-6 rounded-xl bg-[var(--color-emergency)]/10 border border-[var(--color-emergency)]/30 hover:bg-[var(--color-emergency)]/20 transition-colors"
           >
             <AlertTriangle className="w-5 h-5 text-[var(--color-emergency)]" />
@@ -76,7 +78,7 @@ export default function Contact() {
               className="text-[var(--color-emergency)] font-bold text-sm md:text-base"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              Need help now? Call {contact.emergencyPhoneDisplay}
+              Need help now? Call {contact?.emergencyPhoneDisplay || contact?.phoneDisplay}
             </span>
             <Phone className="w-5 h-5 text-[var(--color-emergency)]" />
           </a>
@@ -218,8 +220,8 @@ export default function Contact() {
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
                       <option value="">Select a service</option>
-                      {services.map(s => (
-                        <option key={s.name} value={s.name}>{s.name}</option>
+                      {serviceList.map((s, i) => (
+                        <option key={s.name || i} value={s.name}>{s.name}</option>
                       ))}
                     </select>
                   </div>
@@ -288,7 +290,7 @@ export default function Contact() {
           <div className="reveal space-y-6">
             {/* Phone (most prominent) */}
             <a
-              href={`tel:${contact.phone}`}
+              href={`tel:${contact?.phone}`}
               className="flex items-center gap-4 p-5 rounded-xl card-dark border-[var(--color-blue)]/30 hover:border-[var(--color-blue)]/60 transition-all duration-300 group"
             >
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--color-blue)]/15 flex items-center justify-center group-hover:bg-[var(--color-blue)]/25 transition-colors shadow-[0_0_16px_rgba(14,165,233,0.15)]">
@@ -302,14 +304,14 @@ export default function Contact() {
                   className="text-xl font-bold text-[var(--color-cream)] group-hover:text-[var(--color-blue)] transition-colors"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {contact.phoneDisplay}
+                  {contact?.phoneDisplay}
                 </p>
               </div>
             </a>
 
             {/* Email */}
             <a
-              href={`mailto:${contact.email}`}
+              href={`mailto:${contact?.email}`}
               className="flex items-center gap-4 p-5 rounded-xl card-dark transition-all duration-300 group"
             >
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--color-blue)]/10 flex items-center justify-center">
@@ -320,7 +322,7 @@ export default function Contact() {
                   Email
                 </p>
                 <p className="text-sm font-semibold text-[var(--color-cream)]" style={{ fontFamily: 'var(--font-body)' }}>
-                  {contact.email}
+                  {contact?.email}
                 </p>
               </div>
             </a>
@@ -335,7 +337,7 @@ export default function Contact() {
                   Address
                 </p>
                 <p className="text-sm font-semibold text-[var(--color-cream)]" style={{ fontFamily: 'var(--font-body)' }}>
-                  {contact.fullAddress}
+                  {contact?.fullAddress}
                 </p>
               </div>
             </div>
@@ -350,7 +352,7 @@ export default function Contact() {
                   Hours
                 </p>
                 <p className="text-sm font-semibold text-[var(--color-cream)]" style={{ fontFamily: 'var(--font-body)' }}>
-                  {contact.hours}
+                  {contact?.hours}
                 </p>
               </div>
             </div>
@@ -360,7 +362,7 @@ export default function Contact() {
               <div className="text-center">
                 <MapPin className="w-8 h-8 text-[var(--color-blue)]/40 mx-auto mb-2" />
                 <p className="text-xs text-[var(--color-cream)]/40" style={{ fontFamily: 'var(--font-body)' }}>
-                  {contact.city}, {contact.state} {contact.zip}
+                  {contact?.city}, {contact?.state} {contact?.zip}
                 </p>
               </div>
             </div>
