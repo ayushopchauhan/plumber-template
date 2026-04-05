@@ -5,11 +5,13 @@ import { PipeCorner } from './PlumbingDecorations'
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
-  const { faq } = config
+  const faq = Array.isArray(config.faq) ? config.faq : []
 
   function toggle(index) {
     setOpenIndex(openIndex === index ? null : index)
   }
+
+  if (faq.length === 0) return null
 
   return (
     <section id="faq" className="section-light-warm py-20 md:py-28 relative overflow-hidden">
@@ -46,6 +48,10 @@ export default function FAQ() {
         <div className="reveal space-y-3">
           {faq.map((item, i) => {
             const isOpen = openIndex === i
+            const question = typeof item.question === 'string' ? item.question : (item.question ? String(item.question) : '')
+            const answer = typeof item.answer === 'string' ? item.answer : (item.answer ? String(item.answer) : '')
+
+            if (!question) return null
 
             return (
               <div
@@ -69,7 +75,7 @@ export default function FAQ() {
                     }`}
                     style={{ fontFamily: 'var(--font-heading)' }}
                   >
-                    {item.question}
+                    {question}
                   </span>
                   <ChevronDown
                     className={`w-5 h-5 flex-shrink-0 text-[var(--color-blue)] transition-transform duration-300 ${
@@ -90,7 +96,7 @@ export default function FAQ() {
                         className="text-[var(--color-light-muted)] text-sm md:text-base leading-relaxed"
                         style={{ fontFamily: 'var(--font-body)' }}
                       >
-                        {item.answer}
+                        {answer}
                       </p>
                     </div>
                   </div>
