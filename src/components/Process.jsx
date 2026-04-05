@@ -5,8 +5,11 @@ import { WrenchWatermark } from './PlumbingDecorations'
 const iconMap = { Phone, Truck, Search, Wrench, CheckCircle }
 
 export default function Process() {
-  const { process } = config
-  const lastIndex = process.length - 1
+  // Guard: process may be undefined or empty in GPT-generated config
+  const steps = config.process || []
+  if (steps.length === 0) return null
+
+  const lastIndex = steps.length - 1
 
   return (
     <section id="process" className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 bg-[var(--color-deep)] relative overflow-hidden blueprint-grid grain-overlay">
@@ -36,11 +39,13 @@ export default function Process() {
 
         {/* Mobile + Tablet: vertical timeline */}
         <div className="lg:hidden stagger-children">
-          {process.map((step, i) => {
+          {steps.map((step, i) => {
             const Icon = iconMap[step.icon]
             const isLast = i === lastIndex
+            // Support both 'step' number field and index fallback
+            const stepNumber = step.step ?? i + 1
             return (
-              <div key={step.step} className="reveal flex gap-4 sm:gap-6">
+              <div key={stepNumber} className="reveal flex gap-4 sm:gap-6">
                 {/* Timeline column */}
                 <div className="flex flex-col items-center shrink-0">
                   {/* Numbered circle with glow ring */}
@@ -50,7 +55,7 @@ export default function Process() {
                       className="relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[var(--color-blue)] text-white font-bold text-base shadow-[0_0_24px_rgba(14,165,233,0.4)]"
                       style={{ fontFamily: 'var(--font-heading)' }}
                     >
-                      {step.step}
+                      {stepNumber}
                     </div>
                   </div>
                   {/* Connecting line */}
@@ -84,13 +89,13 @@ export default function Process() {
         {/* Desktop: horizontal timeline */}
         <div className="hidden lg:block">
           {/* Horizontal connecting line with blue dots at intersections */}
-          <div className="relative mx-auto mb-10" style={{ maxWidth: `${process.length * 200}px` }}>
+          <div className="relative mx-auto mb-10" style={{ maxWidth: `${steps.length * 200}px` }}>
             <div className="absolute top-6 left-[10%] right-[10%] h-px bg-gradient-to-r from-[var(--color-blue)]/20 via-[var(--color-blue)]/60 to-[var(--color-blue)]/20" />
             {/* Decorative dots at each step position */}
             <div className="absolute top-6 left-[10%] right-[10%] flex justify-between -translate-y-1/2">
-              {process.map((step) => (
+              {steps.map((step, i) => (
                 <div
-                  key={`dot-${step.step}`}
+                  key={`dot-${step.step ?? i}`}
                   className="w-2 h-2 rounded-full bg-[var(--color-blue)]/40"
                 />
               ))}
@@ -98,11 +103,12 @@ export default function Process() {
           </div>
 
           {/* Steps row */}
-          <div className="grid stagger-children" style={{ gridTemplateColumns: `repeat(${process.length}, 1fr)` }}>
-            {process.map((step) => {
+          <div className="grid stagger-children" style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}>
+            {steps.map((step, i) => {
               const Icon = iconMap[step.icon]
+              const stepNumber = step.step ?? i + 1
               return (
-                <div key={step.step} className="reveal flex flex-col items-center text-center px-3">
+                <div key={stepNumber} className="reveal flex flex-col items-center text-center px-3">
                   {/* Numbered circle with glow ring */}
                   <div className="relative mb-5">
                     <div className="absolute inset-0 rounded-full bg-[var(--color-blue)]/20 blur-md scale-150" />
@@ -110,7 +116,7 @@ export default function Process() {
                       className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-blue)] text-white font-bold text-base shadow-[0_0_24px_rgba(14,165,233,0.4)]"
                       style={{ fontFamily: 'var(--font-heading)' }}
                     >
-                      {step.step}
+                      {stepNumber}
                     </div>
                   </div>
 
