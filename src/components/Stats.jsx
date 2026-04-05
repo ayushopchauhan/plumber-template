@@ -1,19 +1,25 @@
 import config from '../siteConfig'
 import { useCountUp } from '../hooks/useCountUp'
 
+function safeNum(val, fallback = 0) {
+  const n = Number(val)
+  return isFinite(n) && n > 0 ? n : fallback
+}
+
 // Ensure we always have exactly 4 stats for visual balance
 function getDisplayStats() {
-  const { stats, credentials } = config
-  const result = [...(stats || [])]
+  const stats = Array.isArray(config.stats) ? config.stats : []
+  const credentials = config.credentials && typeof config.credentials === 'object' ? config.credentials : {}
+  const result = [...stats]
 
   // If we have fewer than 4, fill from credentials
   if (result.length < 4) {
-    const existing = new Set(result.map(s => s.label?.toLowerCase()))
+    const existing = new Set(result.map(s => (s.label || '').toLowerCase()))
     const fallbacks = [
       { number: credentials.yearsExperience, suffix: '+', label: 'Years Experience' },
       { number: credentials.jobsCompleted, suffix: '+', label: 'Jobs Completed' },
       { number: credentials.satisfactionRate, suffix: '%', label: 'Satisfaction Rate' },
-      { number: parseInt(credentials.responseTime) || 45, suffix: 'min', label: 'Avg Response Time' },
+      { number: parseInt(credentials.responseTime) || 0, suffix: 'min', label: 'Avg Response Time' },
       { number: credentials.reviewCount, suffix: '+', label: 'Happy Customers' },
     ]
     for (const fb of fallbacks) {
@@ -23,12 +29,12 @@ function getDisplayStats() {
       if (existing.has(key)) continue
       // Check for similar labels
       const similar = [...existing].some(e =>
-        e.includes('year') && key.includes('year') ||
-        e.includes('job') && key.includes('job') ||
-        e.includes('satisfaction') && key.includes('satisfaction') ||
-        e.includes('response') && key.includes('response') ||
-        e.includes('customer') && key.includes('customer') ||
-        e.includes('review') && key.includes('review')
+        (e.includes('year') && key.includes('year')) ||
+        (e.includes('job') && key.includes('job')) ||
+        (e.includes('satisfaction') && key.includes('satisfaction')) ||
+        (e.includes('response') && key.includes('response')) ||
+        (e.includes('customer') && key.includes('customer')) ||
+        (e.includes('review') && key.includes('review'))
       )
       if (similar) continue
       existing.add(key)
@@ -36,8 +42,15 @@ function getDisplayStats() {
     }
   }
 
-  // Filter out any stats with 0 or invalid numbers
-  return result.filter(s => s.number && s.number > 0).slice(0, 4)
+  // Filter out any stats with 0 or invalid numbers, normalize fields
+  return result
+    .filter(s => s && typeof s === 'object' && safeNum(s.number) > 0)
+    .map(s => ({
+      number: safeNum(s.number),
+      suffix: typeof s.suffix === 'string' ? s.suffix : (s.suffix != null ? String(s.suffix) : ''),
+      label: typeof s.label === 'string' ? s.label : (s.label != null ? String(s.label) : ''),
+    }))
+    .slice(0, 4)
 }
 
 function StatItem({ number, suffix, label }) {
