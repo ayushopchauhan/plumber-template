@@ -8,6 +8,13 @@ const avatarColors = [
   '#06b6d4', '#f59e0b', '#14b8a6', '#a855f7', '#ef4444',
 ]
 
+function safeStr(val, fallback = '') {
+  if (val == null) return fallback
+  if (typeof val === 'string') return val
+  if (typeof val === 'number') return String(val)
+  return fallback
+}
+
 function getInitials(name) {
   if (!name) return '?'
   const parts = name.trim().split(/\s+/)
@@ -22,7 +29,7 @@ function getAvatarColor(name) {
 }
 
 function isValidImageUrl(url) {
-  if (!url) return false
+  if (!url || typeof url !== 'string') return false
   if (url.includes('source.unsplash.com')) return false
   if (url.includes('placeholder')) return false
   if (url.includes('example.com')) return false
@@ -30,14 +37,18 @@ function isValidImageUrl(url) {
 }
 
 export default function Testimonials() {
-  const { testimonials, credentials } = config
+  const credentials = config.credentials && typeof config.credentials === 'object' ? config.credentials : {}
+  const rawTestimonials = Array.isArray(config.testimonials) ? config.testimonials : []
 
   // Filter: only show 4+ star reviews, deduplicate by name
   const seen = new Set()
-  const filtered = (testimonials || []).filter(t => {
-    if ((t.rating || 5) < 4) return false
-    if (seen.has(t.name)) return false
-    seen.add(t.name)
+  const filtered = rawTestimonials.filter(t => {
+    if (!t || typeof t !== 'object') return false
+    const rating = typeof t.rating === 'number' ? t.rating : 5
+    if (rating < 4) return false
+    const name = safeStr(t.name, '')
+    if (seen.has(name)) return false
+    seen.add(name)
     return true
   })
 
@@ -84,10 +95,10 @@ export default function Testimonials() {
               className="text-sm text-[var(--color-cream)] font-semibold"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              {credentials.googleRating}
+              {credentials.googleRating || ''}
             </span>
             <span className="text-sm text-[var(--color-cream)]/60" style={{ fontFamily: 'var(--font-body)' }}>
-              from {credentials.reviewCount} reviews on Google
+              {credentials.reviewCount ? `from ${credentials.reviewCount} reviews on Google` : 'on Google'}
             </span>
           </div>
         </div>
@@ -113,10 +124,15 @@ export default function Testimonials() {
 }
 
 function TestimonialCard({ testimonial, index }) {
-  const { quote, name, detail, rating, image } = testimonial
+  const quote = safeStr(testimonial.quote)
+  const name = safeStr(testimonial.name, 'Customer')
+  const detail = safeStr(testimonial.detail, 'Customer')
+  const rating = typeof testimonial.rating === 'number' ? testimonial.rating : 5
+  const image = testimonial.image
   const validImage = isValidImageUrl(image)
   const initials = getInitials(name)
   const bgColor = avatarColors[index % avatarColors.length]
+  const starCount = Math.min(Math.max(Math.round(rating), 1), 5)
 
   return (
     <div
@@ -128,7 +144,7 @@ function TestimonialCard({ testimonial, index }) {
 
       {/* Stars */}
       <div className="flex gap-0.5 mb-4">
-        {[...Array(Math.min(rating || 5, 5))].map((_, i) => (
+        {[...Array(starCount)].map((_, i) => (
           <Star key={i} className="w-4 h-4 fill-[var(--color-accent)] text-[var(--color-accent)]" />
         ))}
       </div>
@@ -138,7 +154,7 @@ function TestimonialCard({ testimonial, index }) {
         className="text-[var(--color-cream)]/80 text-sm md:text-base leading-relaxed mb-6"
         style={{ fontFamily: 'var(--font-body)' }}
       >
-        "{quote}"
+        &ldquo;{quote}&rdquo;
       </p>
 
       {/* Customer Info */}
@@ -173,7 +189,7 @@ function TestimonialCard({ testimonial, index }) {
             className="text-[var(--color-blue)] text-xs"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            {detail || 'Customer'}
+            {detail}
           </p>
         </div>
       </div>
