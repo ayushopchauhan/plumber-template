@@ -203,7 +203,7 @@ function DetailPanel({ scenario, onClose }) {
 
 export default function EmergencyTriage() {
   const [selectedId, setSelectedId] = useState(null)
-  const scenarios = config.emergencyTriage.scenarios
+  const scenarios = config.emergencyTriage?.scenarios || []
 
   const selectedScenario = scenarios.find((s) => s.id === selectedId) || null
 
