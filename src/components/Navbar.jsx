@@ -11,34 +11,46 @@ const navLinks = [
 ]
 
 function getLogoSrc() {
-  const url = config.business.logoUrl
-  if (!url) return null
+  const url = config.business && config.business.logoUrl
+  if (!url || typeof url !== 'string') return null
   if (url.includes('placeholder') || url.includes('example.com')) return null
   return url
 }
 
-function LogoMark() {
-  const logoSrc = getLogoSrc()
-  const [imgError, setImgError] = useState(false)
+function getBusinessName() {
+  const name = config.business && config.business.name
+  if (!name || typeof name !== 'string') return ''
+  return name
+}
 
-  if (logoSrc && !imgError) {
-    return (
-      <img
-        src={logoSrc}
-        alt={`${config.business.name} logo`}
-        className="w-8 h-8 lg:w-10 lg:h-10 object-contain rounded"
-        onError={() => setImgError(true)}
-      />
-    )
-  }
-
-  const initials = config.business.name
+function getInitials(name) {
+  if (!name) return ''
+  return name
     .split(/\s+/)
     .filter(w => w.length > 0)
     .slice(0, 2)
     .map(w => w[0])
     .join('')
     .toUpperCase()
+}
+
+function LogoMark() {
+  const logoSrc = getLogoSrc()
+  const [imgError, setImgError] = useState(false)
+  const businessName = getBusinessName()
+
+  if (logoSrc && !imgError) {
+    return (
+      <img
+        src={logoSrc}
+        alt={`${businessName} logo`}
+        className="w-8 h-8 lg:w-10 lg:h-10 object-contain rounded"
+        onError={() => setImgError(true)}
+      />
+    )
+  }
+
+  const initials = getInitials(businessName)
 
   return (
     <span
@@ -57,6 +69,13 @@ function LogoMark() {
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const businessName = getBusinessName()
+  const contact = config.contact || {}
+  const phone = typeof contact.phone === 'string' ? contact.phone : ''
+  const phoneDisplay = typeof contact.phoneDisplay === 'string' ? contact.phoneDisplay : phone
+  const emergencyPhone = typeof contact.emergencyPhone === 'string' ? contact.emergencyPhone : phone
+  const firstName = businessName.split(' ')[0] || businessName
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -92,10 +111,10 @@ export default function Navbar() {
             >
               <LogoMark />
               <span className="text-[var(--color-cream)] font-bold text-lg tracking-tight hidden sm:block">
-                {config.business.name}
+                {businessName}
               </span>
               <span className="text-[var(--color-cream)] font-bold text-lg tracking-tight sm:hidden">
-                {config.business.name.split(' ')[0]}
+                {firstName}
               </span>
             </a>
 
@@ -114,25 +133,29 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Phone CTA */}
-            <a
-              href={`tel:${config.contact.phone}`}
-              className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-white font-semibold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-[var(--color-accent)]/25"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              <Phone className="w-4 h-4" />
-              {config.contact.phoneDisplay}
-            </a>
-
-            {/* Tablet Phone CTA */}
-            <div className="hidden md:flex lg:hidden items-center gap-3">
+            {phone && (
               <a
-                href={`tel:${config.contact.phone}`}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-accent)] text-white font-semibold text-sm"
+                href={`tel:${phone}`}
+                className="hidden lg:flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-white font-semibold text-sm transition-all duration-200 hover:shadow-lg hover:shadow-[var(--color-accent)]/25"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
                 <Phone className="w-4 h-4" />
-                Call Now
+                {phoneDisplay}
               </a>
+            )}
+
+            {/* Tablet Phone CTA */}
+            <div className="hidden md:flex lg:hidden items-center gap-3">
+              {phone && (
+                <a
+                  href={`tel:${phone}`}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-accent)] text-white font-semibold text-sm"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
+                  <Phone className="w-4 h-4" />
+                  Call Now
+                </a>
+              )}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="p-2 rounded-lg text-[var(--color-cream)] hover:bg-white/5 transition-colors"
@@ -173,15 +196,17 @@ export default function Navbar() {
             ))}
 
             {/* Mobile menu phone link */}
-            <a
-              href={`tel:${config.contact.phone}`}
-              onClick={handleLinkClick}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg text-[var(--color-accent)] font-semibold"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              <Phone className="w-5 h-5" />
-              {config.contact.phoneDisplay}
-            </a>
+            {phone && (
+              <a
+                href={`tel:${phone}`}
+                onClick={handleLinkClick}
+                className="flex items-center gap-3 px-4 py-3 rounded-lg text-[var(--color-accent)] font-semibold"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                <Phone className="w-5 h-5" />
+                {phoneDisplay}
+              </a>
+            )}
           </div>
         </div>
       </nav>
@@ -190,14 +215,16 @@ export default function Navbar() {
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
         <div className="bg-[var(--color-deep)]/95 backdrop-blur-xl border-t border-[var(--color-blue)]/15 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
           <div className="flex gap-3">
-            <a
-              href={`tel:${config.contact.emergencyPhone}`}
-              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[var(--color-accent)] text-white font-bold text-sm emergency-pulse"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              <Phone className="w-4 h-4" />
-              Call Now
-            </a>
+            {emergencyPhone && (
+              <a
+                href={`tel:${emergencyPhone}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[var(--color-accent)] text-white font-bold text-sm emergency-pulse"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                <Phone className="w-4 h-4" />
+                Call Now
+              </a>
+            )}
             <a
               href="#contact"
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-[var(--color-blue)]/40 text-[var(--color-blue)] font-bold text-sm hover:bg-[var(--color-blue)]/10 transition-colors"
