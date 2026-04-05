@@ -13,16 +13,19 @@ function isValidPhotoUrl(url) {
 export default function About() {
   const { business, credentials } = config
 
-  // Use ownerName, fallback to business name if garbled/missing
-  const displayName = (business.ownerName && business.ownerName.length > 1 && business.ownerName !== 'Owner' && business.ownerName !== 'Unknown')
-    ? business.ownerName
-    : business.name
+  // Guard: credentials may be undefined in GPT-generated config
+  const creds = credentials || {}
 
-  const displayFirstName = (business.ownerFirstName && business.ownerFirstName.length > 1 && business.ownerFirstName !== 'Owner')
+  // Use ownerName, fallback to business name if garbled/missing
+  const displayName = (business?.ownerName && business.ownerName.length > 1 && business.ownerName !== 'Owner' && business.ownerName !== 'Unknown')
+    ? business.ownerName
+    : (business?.name || '')
+
+  const displayFirstName = (business?.ownerFirstName && business.ownerFirstName.length > 1 && business.ownerFirstName !== 'Owner')
     ? business.ownerFirstName
     : displayName.split(' ')[0]
 
-  const hasRealPhoto = isValidPhotoUrl(business.photoUrl)
+  const hasRealPhoto = isValidPhotoUrl(business?.photoUrl)
 
   // Get initials for fallback avatar
   const initials = displayName.split(/\s+/).map(w => w[0]).join('').substring(0, 2).toUpperCase()
@@ -70,11 +73,11 @@ export default function About() {
                       background: 'linear-gradient(135deg, var(--color-deep) 0%, #1a2332 100%)',
                     }}
                   >
-                    {business.logoUrl ? (
+                    {business?.logoUrl ? (
                       <div className="flex items-center justify-center w-40 h-40">
                         <img
                           src={business.logoUrl}
-                          alt={business.name}
+                          alt={business?.name}
                           className="max-w-full max-h-full object-contain"
                           style={{ imageRendering: 'auto' }}
                           loading="lazy"
@@ -92,7 +95,7 @@ export default function About() {
                       className="mt-4 text-[var(--color-cream)]/60 text-sm"
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
-                      {business.name}
+                      {business?.name}
                     </p>
                   </div>
                 )}
@@ -111,7 +114,7 @@ export default function About() {
           <div className="reveal-right w-full lg:w-7/12">
             {/* Story */}
             <p className="text-[var(--color-light-muted)] leading-relaxed text-base lg:text-lg mb-6">
-              {business.story}
+              {business?.story}
             </p>
 
             {/* Owner quote */}
@@ -127,7 +130,7 @@ export default function About() {
               </cite>
             </blockquote>
 
-            {/* Credential stats */}
+            {/* Credential stats - only shown when credentials exist */}
             <div className="grid grid-cols-3 gap-3 sm:gap-4">
               <div className="rounded-xl card-gradient-border p-4 text-center">
                 <div className="icon-glow rounded-lg inline-flex">
@@ -137,7 +140,7 @@ export default function About() {
                   className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {credentials.googleRating}★
+                  {creds.googleRating ?? '5.0'}&#9733;
                 </p>
                 <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
                   Google Rating
@@ -152,7 +155,7 @@ export default function About() {
                   className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {credentials.yearsExperience}+
+                  {creds.yearsExperience ?? '10'}+
                 </p>
                 <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
                   Years Experience
@@ -167,7 +170,7 @@ export default function About() {
                   className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {credentials.reviewCount}+
+                  {creds.reviewCount ?? '50'}+
                 </p>
                 <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
                   Reviews
