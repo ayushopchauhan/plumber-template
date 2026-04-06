@@ -162,6 +162,7 @@ export default function About() {
                 </p>
               </div>
 
+              {creds.reviewCount > 0 && (
               <div className="rounded-xl card-gradient-border p-4 text-center">
                 <div className="icon-glow rounded-lg inline-flex">
                   <Users className="h-5 w-5 text-[var(--color-blue)] mx-auto mb-2" strokeWidth={1.5} />
@@ -170,12 +171,13 @@ export default function About() {
                   className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {creds.reviewCount ?? '50'}+
+                  {creds.reviewCount}+
                 </p>
                 <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
                   Reviews
                 </p>
               </div>
+              )}
             </div>
           </div>
         </div>
