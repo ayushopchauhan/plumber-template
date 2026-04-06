@@ -38,7 +38,7 @@ export default function WaterCalculator() {
     let count = 0
     issues.forEach((issue, i) => {
       if (checked[i]) {
-        monthly += safeNum(issue.monthlyWaste)
+        monthly += safeNum(issue.monthlyWaste || issue.costPerMonth)
         gallons += safeNum(issue.gallonsPerDay)
         count++
       }
@@ -90,7 +90,7 @@ export default function WaterCalculator() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-3">
               {issues.map((issue, i) => {
                 const name = safeStr(issue.name, `Issue ${i + 1}`)
-                const monthlyWasteCost = safeNum(issue.monthlyWaste)
+                const monthlyWasteCost = safeNum(issue.monthlyWaste || issue.costPerMonth)
                 const gallonsPerDay = safeNum(issue.gallonsPerDay)
 
                 return (

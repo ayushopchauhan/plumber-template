@@ -1,8 +1,8 @@
 import config from '../siteConfig'
-import { Phone, Truck, Search, Wrench, CheckCircle } from 'lucide-react'
+import { Phone, Truck, Search, Wrench, CheckCircle, ClipboardCheck, ThumbsUp, Clock, Shield, Star, Award, UserCheck, PhoneCall, Hammer, Settings, Clipboard } from 'lucide-react'
 import { WrenchWatermark } from './PlumbingDecorations'
 
-const iconMap = { Phone, Truck, Search, Wrench, CheckCircle }
+const iconMap = { Phone, PhoneCall, Truck, Search, Wrench, CheckCircle, ClipboardCheck, ThumbsUp, Clock, Shield, Star, Award, UserCheck, Hammer, Settings, Clipboard }
 
 export default function Process() {
   // Guard: process may be undefined or empty in GPT-generated config
@@ -40,7 +40,7 @@ export default function Process() {
         {/* Mobile + Tablet: vertical timeline */}
         <div className="lg:hidden stagger-children">
           {steps.map((step, i) => {
-            const Icon = iconMap[step.icon]
+            const Icon = iconMap[step.icon] || CheckCircle
             const isLast = i === lastIndex
             // Support both 'step' number field and index fallback
             const stepNumber = step.step ?? i + 1
@@ -105,7 +105,7 @@ export default function Process() {
           {/* Steps row */}
           <div className="grid stagger-children" style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}>
             {steps.map((step, i) => {
-              const Icon = iconMap[step.icon]
+              const Icon = iconMap[step.icon] || CheckCircle
               const stepNumber = step.step ?? i + 1
               return (
                 <div key={stepNumber} className="reveal flex flex-col items-center text-center px-3">

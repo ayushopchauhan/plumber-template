@@ -1,8 +1,46 @@
 import config from '../siteConfig'
-import { Siren, Waves, Flame, Wrench, Droplets, Construction } from 'lucide-react'
+import {
+  Siren, Waves, Flame, Wrench, Droplets, Construction,
+  ShowerHead, Bath, Thermometer, ThermometerSun, Gauge, Hammer,
+  PipetteIcon, Fan, Heater, Home, Shield, CheckCircle, Settings,
+  Zap, AlertTriangle, Clock, Phone, Star, Award, Pipette,
+  CloudRain, Snowflake, Sun, Wind, Lightbulb, Power, Plug,
+  Trash2, Search, WrenchIcon, Cog, Filter, Lock, Key
+} from 'lucide-react'
 import { WrenchWatermark } from './PlumbingDecorations'
 
-const iconMap = { Siren, Waves, Flame, Wrench, Droplets, Construction }
+const iconMap = {
+  Siren, Waves, Flame, Wrench, Droplets, Construction,
+  ShowerHead, Bath, Thermometer, ThermometerSun, Gauge, Hammer,
+  PipetteIcon, Fan, Heater, Home, Shield, CheckCircle, Settings,
+  Zap, AlertTriangle, Clock, Phone, Star, Award, Pipette,
+  CloudRain, Snowflake, Sun, Wind, Lightbulb, Power, Plug,
+  Trash2, Search, WrenchIcon, Cog, Filter, Lock, Key,
+  // Common GPT aliases
+  Pipe: Droplets,
+  Toilet: Droplets,
+  Faucet: Droplets,
+  Boiler: Flame,
+  Gas: Flame,
+  Emergency: Siren,
+  Heating: ThermometerSun,
+  Water: Waves,
+  Drain: Waves,
+  Tool: Wrench,
+  Tools: Wrench,
+  Plumbing: Wrench,
+  Repair: Wrench,
+  Install: Construction,
+  Installation: Construction,
+  Bathroom: Bath,
+  Shower: ShowerHead,
+  Electric: Zap,
+  Electrical: Zap,
+  Safety: Shield,
+  Inspection: Search,
+  Maintenance: Settings,
+  Kitchen: Home,
+}
 
 function safeStr(val, fallback = '') {
   if (val == null) return fallback
@@ -48,7 +86,7 @@ export default function Services() {
           {services.map((service, i) => {
             if (!service || typeof service !== 'object') return null
             const iconKey = safeStr(service.icon)
-            const Icon = iconMap[iconKey] || null
+            const Icon = iconMap[iconKey] || Wrench
             const name = safeStr(service.name, 'Service')
             const description = safeStr(service.description)
             const priceRange = safeStr(service.priceRange)
