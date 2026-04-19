@@ -136,22 +136,22 @@ function TestimonialCard({ testimonial, index }) {
 
   return (
     <div
-      className={`reveal group min-w-[85vw] sm:min-w-[70vw] md:min-w-0 snap-center card-dark-gradient rounded-2xl p-6 md:p-8 border-l-2 border-l-[var(--color-blue)]/40 hover:border-l-[var(--color-blue)] transition-all duration-300`}
+      className={`reveal group min-w-[calc(100vw-3rem)] sm:min-w-[70vw] md:min-w-0 snap-center card-dark-gradient rounded-2xl p-5 sm:p-6 md:p-8 border-l-2 border-l-[var(--color-blue)]/40 hover:border-l-[var(--color-blue)] transition-all duration-300`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Quote Icon */}
-      <Quote className="w-10 h-10 mb-4" style={{ color: 'var(--color-blue)', opacity: 0.6 }} />
+      <Quote className="w-7 h-7 md:w-10 md:h-10 mb-4" style={{ color: 'var(--color-blue)', opacity: 0.6 }} />
 
       {/* Stars */}
       <div className="flex gap-0.5 mb-4">
         {[...Array(starCount)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 fill-[var(--color-accent)] text-[var(--color-accent)]" />
+          <Star key={i} className="w-4.5 h-4.5 fill-[var(--color-accent)] text-[var(--color-accent)]" />
         ))}
       </div>
 
       {/* Quote Text */}
       <p
-        className="text-[var(--color-cream)]/80 text-sm md:text-base leading-relaxed mb-6"
+        className="text-[var(--color-cream)]/80 text-base leading-relaxed mb-6"
         style={{ fontFamily: 'var(--font-body)' }}
       >
         &ldquo;{quote}&rdquo;

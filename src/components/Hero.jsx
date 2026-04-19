@@ -73,9 +73,9 @@ export default function Hero() {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[var(--color-blue)] to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-32 md:pt-28 md:pb-36">
+      <div className="relative z-10 max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 text-center pt-20 pb-28 md:pt-28 md:pb-36">
         {/* Frosted Glass Card */}
-        <div className="card-glass rounded-2xl px-6 py-10 sm:px-10 sm:py-14 md:px-14 md:py-16" style={{ boxShadow: '0 0 30px rgba(14, 165, 233, 0.08), 0 0 60px rgba(14, 165, 233, 0.04)' }}>
+        <div className="card-glass rounded-2xl px-4 py-8 sm:px-10 sm:py-14 md:px-14 md:py-16" style={{ boxShadow: '0 0 30px rgba(14, 165, 233, 0.08), 0 0 60px rgba(14, 165, 233, 0.04)' }}>
           {/* Pre-heading: Emergency badge */}
           <div className="reveal mb-5 md:mb-6">
             <span
@@ -96,7 +96,7 @@ export default function Hero() {
 
           {/* Headline */}
           <h1
-            className="reveal text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 md:mb-8"
+            className="reveal text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 md:mb-8"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             <span className="text-white">{firstPart}</span>

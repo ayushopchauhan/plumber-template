@@ -214,7 +214,7 @@ export default function Navbar() {
       {/* Mobile Fixed Bottom Bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
         <div className="bg-[var(--color-deep)]/95 backdrop-blur-xl border-t border-[var(--color-blue)]/15 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             {emergencyPhone && (
               <a
                 href={`tel:${emergencyPhone}`}

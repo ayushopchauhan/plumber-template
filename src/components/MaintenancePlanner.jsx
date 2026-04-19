@@ -156,7 +156,7 @@ function MaintenancePlannerInner({ months }) {
                   key={i}
                   onClick={() => setSelectedMonth(i)}
                   className={`
-                    flex-shrink-0 flex flex-col items-center gap-1.5 rounded-xl px-4 py-3 min-w-[72px] transition-all duration-200
+                    flex-shrink-0 flex flex-col items-center gap-1.5 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 min-w-[60px] sm:min-w-[72px] transition-all duration-200
                     ${isSelected ? 'card-light shadow-md' : 'bg-white/60'}
                   `}
                   style={isSelected ? { borderColor: 'var(--color-blue)' } : { border: '1px solid transparent' }}

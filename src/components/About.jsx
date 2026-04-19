@@ -63,12 +63,12 @@ export default function About() {
                   <img
                     src={business.photoUrl}
                     alt={displayName}
-                    className="w-64 h-80 sm:w-72 sm:h-88 lg:w-80 lg:h-96 object-cover"
+                    className="w-64 h-80 sm:w-72 sm:h-[22rem] lg:w-80 lg:h-96 object-cover"
                     loading="lazy"
                   />
                 ) : (
                   <div
-                    className="w-64 h-80 sm:w-72 sm:h-88 lg:w-80 lg:h-96 flex flex-col items-center justify-center"
+                    className="w-64 h-80 sm:w-72 sm:h-[22rem] lg:w-80 lg:h-96 flex flex-col items-center justify-center"
                     style={{
                       background: 'linear-gradient(135deg, var(--color-deep) 0%, #1a2332 100%)',
                     }}
@@ -119,7 +119,7 @@ export default function About() {
 
             {/* Owner quote */}
             <blockquote className="border-l-2 border-[var(--color-blue)] pl-5 mb-8">
-              <p className="italic text-[var(--color-light-muted)] text-sm lg:text-base leading-relaxed">
+              <p className="italic text-[var(--color-light-muted)] text-base leading-relaxed">
                 &ldquo;Every homeowner deserves a plumber they can trust. Someone who shows up when they say they will, charges what they quoted, and stands behind their work. That is what we do, every single day.&rdquo;
               </p>
               <cite

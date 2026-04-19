@@ -118,7 +118,7 @@ export default function Chatbot() {
       {/* Floating Action Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 cursor-pointer ${
+        className={`fixed bottom-[4.5rem] md:bottom-6 right-4 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 cursor-pointer ${
           isOpen
             ? 'bg-[var(--color-surface)] border border-[var(--color-cream)]/10 rotate-90 scale-90'
             : 'bg-[var(--color-blue)] hover:bg-[var(--color-blue-light)] hover:scale-110'

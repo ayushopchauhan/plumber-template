@@ -121,17 +121,17 @@ export default function Contact() {
               </div>
             ) : (
               <div className="relative">
-                {/* PipeCorner decorations */}
-                <div className="absolute -top-2 -left-2 z-10">
+                {/* PipeCorner decorations - hidden on mobile to prevent overlap */}
+                <div className="hidden sm:block absolute -top-2 -left-2 z-10">
                   <PipeCorner position="top-left" size={32} />
                 </div>
-                <div className="absolute -top-2 -right-2 z-10">
+                <div className="hidden sm:block absolute -top-2 -right-2 z-10">
                   <PipeCorner position="top-right" size={32} />
                 </div>
-                <div className="absolute -bottom-2 -left-2 z-10">
+                <div className="hidden sm:block absolute -bottom-2 -left-2 z-10">
                   <PipeCorner position="bottom-left" size={32} />
                 </div>
-                <div className="absolute -bottom-2 -right-2 z-10">
+                <div className="hidden sm:block absolute -bottom-2 -right-2 z-10">
                   <PipeCorner position="bottom-right" size={32} />
                 </div>
 

@@ -96,7 +96,7 @@ export default function Services() {
               <a
                 key={i}
                 href="#contact"
-                className="reveal group relative block rounded-xl card-gradient-border p-6 lg:p-7 cursor-pointer w-full md:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-1rem)]"
+                className="reveal group relative block rounded-xl card-gradient-border p-5 sm:p-6 lg:p-7 cursor-pointer w-full md:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-1rem)]"
               >
                 {/* Popular badge */}
                 {popular && (
@@ -106,8 +106,8 @@ export default function Services() {
                 )}
 
                 {/* Icon */}
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--color-blue-subtle)] icon-glow">
-                  {Icon && <Icon className="h-6 w-6 text-[var(--color-blue)]" strokeWidth={1.5} />}
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-[var(--color-blue-subtle)] icon-glow">
+                  {Icon && <Icon className="h-7 w-7 text-[var(--color-blue)]" strokeWidth={1.5} />}
                 </div>
 
                 {/* Name */}
@@ -119,7 +119,7 @@ export default function Services() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-[var(--color-light-muted)] leading-relaxed mb-4">
+                <p className="text-sm md:text-base text-[var(--color-light-muted)] leading-relaxed mb-4">
                   {description}
                 </p>
 

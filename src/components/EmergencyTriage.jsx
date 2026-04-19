@@ -164,7 +164,7 @@ export default function EmergencyTriage() {
         <div className="lg:hidden">
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 stagger-children">
             {scenarios.map((scenario) => (
-              <div key={scenario.id} className="reveal w-[calc(50%-0.375rem)] md:w-[calc(33.333%-0.667rem)]">
+              <div key={scenario.id} className="reveal w-full sm:w-[calc(50%-0.375rem)] md:w-[calc(33.333%-0.667rem)]">
                 <ScenarioCard scenario={scenario} isSelected={selectedId === scenario.id} onSelect={handleSelect} />
               </div>
             ))}

@@ -141,7 +141,7 @@ function CostEstimatorInner({ services }) {
               >
                 Select a Service
               </h3>
-              <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {services.map((svc, i) => (
                   <button
                     key={svc.name || i}

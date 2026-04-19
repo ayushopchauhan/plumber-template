@@ -59,24 +59,24 @@ function StatItem({ number, suffix, label }) {
   return (
     <div
       ref={ref}
-      className="card-dark-gradient relative flex flex-col items-center rounded-xl py-6 md:py-8 lg:py-10 px-4"
+      className="card-dark-gradient relative flex flex-col items-center rounded-xl py-5 md:py-8 lg:py-10 px-3 md:px-4"
     >
       <div className="flex items-baseline gap-0.5">
         <span
-          className="text-blue-gradient text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums"
+          className="text-blue-gradient text-3xl sm:text-5xl lg:text-6xl font-bold tabular-nums"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
           {count.toLocaleString()}
         </span>
         <span
-          className="text-[var(--color-blue-light)] text-xl sm:text-2xl lg:text-3xl font-bold"
+          className="text-[var(--color-blue-light)] text-lg sm:text-2xl lg:text-3xl font-bold"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
           {suffix}
         </span>
       </div>
       <span
-        className="mt-3 text-[var(--color-cream-dark)]/70 text-xs sm:text-sm tracking-wide uppercase"
+        className="mt-3 text-[var(--color-cream)] text-xs sm:text-sm tracking-wide uppercase"
         style={{ fontFamily: 'var(--font-body)' }}
       >
         {label}

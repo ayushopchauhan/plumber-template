@@ -83,7 +83,7 @@ export default function TrustBar() {
 
       {/* Mobile: Horizontal scroll */}
       <div className="md:hidden overflow-x-auto scrollbar-hide relative z-10">
-        <div className="flex items-center gap-0 min-w-max">
+        <div className="flex items-center gap-1 min-w-max">
           {items.map((item, i) => {
             const iconKey = typeof item.icon === 'string' ? item.icon : ''
             const Icon = iconMap[iconKey] || Shield
@@ -98,9 +98,9 @@ export default function TrustBar() {
                     : 'none',
                 }}
               >
-                <Icon className="w-4 h-4 shrink-0" style={{ color: 'var(--color-blue)' }} />
+                <Icon className="w-5 h-5 shrink-0" style={{ color: 'var(--color-blue)' }} />
                 <span
-                  className="text-xs font-semibold whitespace-nowrap"
+                  className="text-sm font-semibold whitespace-nowrap"
                   style={{
                     fontFamily: 'var(--font-heading)',
                     color: '#111827',
