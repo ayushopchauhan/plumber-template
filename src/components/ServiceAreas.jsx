@@ -14,31 +14,51 @@ export default function ServiceAreas() {
   if (serviceAreas.length === 0) return null
 
   return (
-    <section id="areas" className="section-light py-20 md:py-28 relative overflow-hidden">
-      {/* Floating glow orbs */}
-      <div className="glow-orb glow-orb-blue w-[350px] h-[350px]" style={{ bottom: '-80px', right: '-5%' }} />
-      <div className="glow-orb glow-orb-cyan w-[200px] h-[200px]" style={{ top: '10%', left: '-3%' }} />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="areas"
+      style={{
+        background: '#F6F8FA',
+        padding: '80px 24px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         {/* Section Header */}
-        <div className="text-center mb-14 md:mb-16">
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <span
-            className="reveal inline-block text-[var(--color-blue)] text-xs tracking-[0.3em] uppercase mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            style={{
+              display: 'inline-block',
+              color: '#0EA5E9',
+              fontSize: '12px',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              fontWeight: 600,
+              fontFamily: 'var(--font-heading)',
+              marginBottom: '12px',
+            }}
           >
             Coverage
           </span>
           <h2
-            className="reveal text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-light-text)] mb-6"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+              fontWeight: 800,
+              color: '#1F2937',
+              marginBottom: '16px',
+              letterSpacing: '-0.02em',
+            }}
           >
             Areas We Serve
           </h2>
-          <div className="reveal w-16 h-0.5 bg-[var(--color-blue)] mx-auto" />
         </div>
 
-        {/* Areas Grid - flex wrap for centered last row */}
-        <div className="flex flex-wrap justify-center gap-5 md:gap-6">
+        {/* Areas Grid */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          style={{ gap: '16px' }}
+        >
           {serviceAreas.map((area, i) => {
             if (!area || typeof area !== 'object') return null
             const name = safeStr(area.name, `Area ${i + 1}`)
@@ -48,29 +68,62 @@ export default function ServiceAreas() {
             return (
               <div
                 key={i}
-                className="reveal group card-gradient-border rounded-2xl p-6 w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
-                style={{ transitionDelay: `${i * 80}ms` }}
+                className="reveal"
+                style={{
+                  background: '#FFFFFF',
+                  borderRadius: '16px',
+                  padding: '24px',
+                  border: '1px solid #E5E7EB',
+                  transition: 'all 0.25s ease',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = '#0EA5E9'
+                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(14,165,233,0.12)'
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = '#E5E7EB'
+                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
               >
                 {/* Area Icon + Name */}
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--color-blue-subtle)] flex items-center justify-center icon-glow">
-                    <MapPin className="w-5 h-5 text-[var(--color-blue)]" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                  <div
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '10px',
+                      background: 'rgba(14,165,233,0.08)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <MapPin style={{ width: '20px', height: '20px', color: '#0EA5E9' }} />
                   </div>
-                  <div>
-                    <h3
-                      className="text-lg font-bold text-[var(--color-light-text)] group-hover:text-[var(--color-blue)] transition-colors"
-                      style={{ fontFamily: 'var(--font-heading)' }}
-                    >
-                      {name}
-                    </h3>
-                  </div>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '18px',
+                      fontWeight: 700,
+                      color: '#1F2937',
+                    }}
+                  >
+                    {name}
+                  </h3>
                 </div>
 
                 {/* Description */}
                 {description && (
                   <p
-                    className="text-[var(--color-light-muted)] text-sm leading-relaxed mb-4"
-                    style={{ fontFamily: 'var(--font-body)' }}
+                    style={{
+                      color: '#6B7280',
+                      fontSize: '14px',
+                      lineHeight: 1.6,
+                      marginBottom: responseTime ? '16px' : '0',
+                    }}
                   >
                     {description}
                   </p>
@@ -78,11 +131,24 @@ export default function ServiceAreas() {
 
                 {/* Response Time Pill */}
                 {responseTime && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--color-blue)] text-white">
-                    <Clock className="w-3.5 h-3.5 text-white" />
+                  <div
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '5px 12px',
+                      borderRadius: '100px',
+                      background: '#0EA5E9',
+                      color: '#FFFFFF',
+                    }}
+                  >
+                    <Clock style={{ width: '14px', height: '14px' }} />
                     <span
-                      className="text-xs font-semibold text-white"
-                      style={{ fontFamily: 'var(--font-heading)' }}
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        fontFamily: 'var(--font-heading)',
+                      }}
                     >
                       {responseTime} response
                     </span>

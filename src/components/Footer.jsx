@@ -26,12 +26,16 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-[#070F1A] relative pt-0 pb-20 md:pb-8 grain-overlay overflow-hidden">
-        {/* Floating glow orb */}
-        <div className="glow-orb glow-orb-blue w-[300px] h-[300px]" style={{ top: '20%', right: '5%' }} />
-
-        {/* Blue divider at the very top */}
-        <div className="divider-blue mb-16" />
+      <footer
+        style={{
+          background: '#070F1A',
+          position: 'relative',
+          paddingTop: '48px',
+          paddingBottom: '80px',
+          overflow: 'hidden',
+        }}
+        className="md:pb-8"
+      >
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main Grid */}

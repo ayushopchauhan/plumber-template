@@ -22,6 +22,7 @@ export default function TrustBar() {
         borderTop: '1px solid var(--color-light-border)',
         borderBottom: '1px solid var(--color-light-border)',
         background: '#FFFFFF',
+        overflow: 'hidden',
       }}
     >
       {/* Desktop: Single row, evenly spaced */}

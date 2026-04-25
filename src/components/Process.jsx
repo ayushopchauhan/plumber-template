@@ -1,6 +1,6 @@
 import config from '../siteConfig'
 import { Phone, Truck, Search, Wrench, CheckCircle, ClipboardCheck, ThumbsUp, Clock, Shield, Star, Award, UserCheck, PhoneCall, Hammer, Settings, Clipboard } from 'lucide-react'
-import { WrenchWatermark } from './PlumbingDecorations'
+// Decorations removed for cleaner design
 
 const iconMap = { Phone, PhoneCall, Truck, Search, Wrench, CheckCircle, ClipboardCheck, ThumbsUp, Clock, Shield, Star, Award, UserCheck, Hammer, Settings, Clipboard }
 
@@ -12,12 +12,7 @@ export default function Process() {
   const lastIndex = steps.length - 1
 
   return (
-    <section id="process" className="py-16 md:py-20 lg:py-28 px-4 sm:px-6 bg-[var(--color-deep)] relative overflow-hidden blueprint-grid grain-overlay">
-      <WrenchWatermark side="left" />
-
-      {/* Glow orbs */}
-      <div className="glow-orb glow-orb-blue w-[350px] h-[350px] top-[-100px] right-[-80px]" />
-      <div className="glow-orb glow-orb-orange w-[200px] h-[200px] bottom-[-60px] left-[-40px]" />
+    <section id="process" style={{ background: '#0D1117', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section header */}

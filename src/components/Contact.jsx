@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import config from '../siteConfig'
 import { Phone, Mail, MapPin, Clock, Send, AlertTriangle } from 'lucide-react'
-import { PipeCorner } from './PlumbingDecorations'
+// Decorations removed for cleaner design
 
 const initialForm = {
   name: '',
@@ -58,13 +58,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-[var(--color-deep)] relative overflow-hidden grain-overlay">
-      {/* Floating glow orbs */}
-      <div className="glow-orb glow-orb-blue w-[400px] h-[400px]" style={{ top: '5%', right: '-5%' }} />
-      <div className="glow-orb glow-orb-orange w-[250px] h-[250px]" style={{ bottom: '10%', left: '-3%' }} />
-
-      {/* Background accent */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[var(--color-blue)]/5 rounded-full blur-[100px] pointer-events-none" />
+    <section id="contact" style={{ background: '#0D1117', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Emergency Banner */}
@@ -121,20 +115,6 @@ export default function Contact() {
               </div>
             ) : (
               <div className="relative">
-                {/* PipeCorner decorations - hidden on mobile to prevent overlap */}
-                <div className="hidden sm:block absolute -top-2 -left-2 z-10">
-                  <PipeCorner position="top-left" size={32} />
-                </div>
-                <div className="hidden sm:block absolute -top-2 -right-2 z-10">
-                  <PipeCorner position="top-right" size={32} />
-                </div>
-                <div className="hidden sm:block absolute -bottom-2 -left-2 z-10">
-                  <PipeCorner position="bottom-left" size={32} />
-                </div>
-                <div className="hidden sm:block absolute -bottom-2 -right-2 z-10">
-                  <PipeCorner position="bottom-right" size={32} />
-                </div>
-
                 <form onSubmit={handleSubmit} className="space-y-5 card-dark rounded-2xl p-6 sm:p-8">
                   {/* Name */}
                   <div>

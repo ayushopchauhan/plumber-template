@@ -31,9 +31,7 @@ export default function About() {
   const initials = displayName.split(/\s+/).map(w => w[0]).join('').substring(0, 2).toUpperCase()
 
   return (
-    <section id="about" className="section-light-warm py-16 md:py-20 lg:py-28 px-4 sm:px-6 relative overflow-hidden">
-      {/* Floating glow orb */}
-      <div className="glow-orb glow-orb-blue w-[400px] h-[400px]" style={{ top: '10%', right: '-5%' }} />
+    <section id="about" style={{ background: '#EFF2F5', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
 
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
@@ -70,7 +68,7 @@ export default function About() {
                   <div
                     className="w-64 h-80 sm:w-72 sm:h-[22rem] lg:w-80 lg:h-96 flex flex-col items-center justify-center"
                     style={{
-                      background: 'linear-gradient(135deg, var(--color-deep) 0%, #1a2332 100%)',
+                      background: 'linear-gradient(135deg, #0C4A6E 0%, #0369A1 50%, #0EA5E9 100%)',
                     }}
                   >
                     {business?.logoUrl ? (
@@ -85,15 +83,24 @@ export default function About() {
                       </div>
                     ) : (
                       <span
-                        className="text-7xl text-[var(--color-blue)]"
-                        style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}
+                        style={{
+                          fontFamily: "'Dancing Script', cursive",
+                          fontWeight: 700,
+                          fontSize: '72px',
+                          color: 'rgba(255,255,255,0.9)',
+                          textShadow: '0 2px 20px rgba(0,0,0,0.2)',
+                        }}
                       >
                         {initials}
                       </span>
                     )}
                     <p
-                      className="mt-4 text-[var(--color-cream)]/60 text-sm"
-                      style={{ fontFamily: 'var(--font-body)' }}
+                      style={{
+                        marginTop: '16px',
+                        color: 'rgba(255,255,255,0.7)',
+                        fontSize: '14px',
+                        fontFamily: 'var(--font-body)',
+                      }}
                     >
                       {business?.name}
                     </p>
@@ -130,52 +137,32 @@ export default function About() {
               </cite>
             </blockquote>
 
-            {/* Credential stats - only shown when credentials exist */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4">
-              <div className="rounded-xl card-gradient-border p-4 text-center">
-                <div className="icon-glow rounded-lg inline-flex">
-                  <Award className="h-5 w-5 text-[var(--color-blue)] mx-auto mb-2" strokeWidth={1.5} />
-                </div>
-                <p
-                  className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
-                  style={{ fontFamily: 'var(--font-heading)' }}
+            {/* Credential stats */}
+            <div className="grid grid-cols-3" style={{ gap: '12px' }}>
+              {[
+                { icon: Award, value: `${creds.googleRating ?? '5.0'}★`, label: 'Google Rating' },
+                { icon: Shield, value: `${creds.yearsExperience ?? '10'}+`, label: 'Years Experience' },
+                { icon: Users, value: `${creds.jobsCompleted ?? '1000'}+`, label: 'Jobs Completed' },
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: '#FFFFFF',
+                    borderRadius: '12px',
+                    padding: '16px 12px',
+                    textAlign: 'center',
+                    border: '1px solid #E5E7EB',
+                  }}
                 >
-                  {creds.googleRating ?? '5.0'}&#9733;
-                </p>
-                <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
-                  Google Rating
-                </p>
-              </div>
-
-              <div className="rounded-xl card-gradient-border p-4 text-center">
-                <div className="icon-glow rounded-lg inline-flex">
-                  <Shield className="h-5 w-5 text-[var(--color-blue)] mx-auto mb-2" strokeWidth={1.5} />
+                  <stat.icon style={{ width: '20px', height: '20px', color: '#0EA5E9', margin: '0 auto 8px' }} strokeWidth={1.5} />
+                  <p style={{ fontFamily: 'var(--font-heading)', fontSize: '14px', fontWeight: 700, color: '#1F2937', marginBottom: '2px' }}>
+                    {stat.value}
+                  </p>
+                  <p style={{ fontSize: '10px', color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    {stat.label}
+                  </p>
                 </div>
-                <p
-                  className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  {creds.yearsExperience ?? '10'}+
-                </p>
-                <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
-                  Years Experience
-                </p>
-              </div>
-
-              <div className="rounded-xl card-gradient-border p-4 text-center">
-                <div className="icon-glow rounded-lg inline-flex">
-                  <Users className="h-5 w-5 text-[var(--color-blue)] mx-auto mb-2" strokeWidth={1.5} />
-                </div>
-                <p
-                  className="text-sm font-semibold text-[var(--color-light-text)] mb-0.5"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  {creds.jobsCompleted ?? '1000'}+
-                </p>
-                <p className="text-[10px] sm:text-xs text-[var(--color-light-muted)] uppercase tracking-wider">
-                  Jobs Completed
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>

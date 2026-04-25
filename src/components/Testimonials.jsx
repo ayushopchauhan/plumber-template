@@ -1,8 +1,6 @@
 import config from '../siteConfig'
 import { Star, Quote } from 'lucide-react'
-import { WaterDropPattern } from './PlumbingDecorations'
 
-// Color palette for avatar initials (deterministic by name)
 const avatarColors = [
   '#0ea5e9', '#f97316', '#10b981', '#8b5cf6', '#ec4899',
   '#06b6d4', '#f59e0b', '#14b8a6', '#a855f7', '#ef4444',
@@ -22,12 +20,6 @@ function getInitials(name) {
   return name.substring(0, 2).toUpperCase()
 }
 
-function getAvatarColor(name) {
-  let hash = 0
-  for (let i = 0; i < (name || '').length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash)
-  return avatarColors[Math.abs(hash) % avatarColors.length]
-}
-
 function isValidImageUrl(url) {
   if (!url || typeof url !== 'string') return false
   if (url.includes('source.unsplash.com')) return false
@@ -40,7 +32,6 @@ export default function Testimonials() {
   const credentials = config.credentials && typeof config.credentials === 'object' ? config.credentials : {}
   const rawTestimonials = Array.isArray(config.testimonials) ? config.testimonials : []
 
-  // Filter: only show 4+ star reviews, deduplicate by name
   const seen = new Set()
   const filtered = rawTestimonials.filter(t => {
     if (!t || typeof t !== 'object') return false
@@ -52,70 +43,96 @@ export default function Testimonials() {
     return true
   })
 
-  // Hide section entirely if no valid testimonials
   if (filtered.length === 0) return null
 
   return (
-    <section id="reviews" className="py-20 md:py-28 bg-[var(--color-deep)] relative overflow-hidden grain-overlay">
-      <WaterDropPattern />
+    <section
+      id="reviews"
+      style={{
+        background: '#0D1117',
+        padding: '80px 24px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Subtle accent glow */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '-100px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '600px',
+          height: '400px',
+          background: 'radial-gradient(ellipse, rgba(14,165,233,0.06) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
 
-      {/* Floating glow orbs */}
-      <div className="glow-orb glow-orb-blue w-[350px] h-[350px]" style={{ top: '-50px', left: '10%' }} />
-      <div className="glow-orb glow-orb-orange w-[250px] h-[250px]" style={{ bottom: '-40px', right: '5%' }} />
-
-      {/* Background blue glow orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[var(--color-blue)]/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[var(--color-blue)]/5 rounded-full blur-[80px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-14 md:mb-16">
+      <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        {/* Header */}
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <span
-            className="reveal inline-block text-[var(--color-blue)] text-xs tracking-[0.3em] uppercase mb-4"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            style={{
+              display: 'inline-block',
+              color: '#0EA5E9',
+              fontSize: '12px',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              fontWeight: 600,
+              fontFamily: 'var(--font-heading)',
+              marginBottom: '12px',
+            }}
           >
             Reviews
           </span>
           <h2
-            className="reveal text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-cream)] mb-6"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+              fontWeight: 800,
+              color: '#E6EDF3',
+              marginBottom: '20px',
+              letterSpacing: '-0.02em',
+            }}
           >
             What Our Customers Say
           </h2>
-          <div className="reveal w-16 h-0.5 bg-[var(--color-blue)] mx-auto mb-8" />
 
           {/* Google Rating Badge */}
-          <div className="reveal inline-flex items-center gap-2 px-5 py-2.5 rounded-full card-dark border-[var(--color-blue)]/25">
-            <div className="flex gap-0.5">
+          <div
+            className="reveal"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '8px 20px',
+              borderRadius: '100px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(14,165,233,0.15)',
+            }}
+          >
+            <div style={{ display: 'flex', gap: '2px' }}>
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-[var(--color-accent)] text-[var(--color-accent)]" />
+                <Star key={i} style={{ width: '14px', height: '14px', fill: '#F59E0B', color: '#F59E0B' }} />
               ))}
             </div>
-            <span
-              className="text-sm text-[var(--color-cream)] font-semibold"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
+            <span style={{ color: '#E6EDF3', fontSize: '14px', fontWeight: 600, fontFamily: 'var(--font-heading)' }}>
               {credentials.googleRating || ''}
             </span>
-            <span className="text-sm text-[var(--color-cream)]/60" style={{ fontFamily: 'var(--font-body)' }}>
-              {credentials.reviewCount ? `from ${credentials.reviewCount} reviews on Google` : 'on Google'}
+            <span style={{ color: 'rgba(201,209,217,0.5)', fontSize: '13px' }}>
+              {credentials.reviewCount ? `from ${credentials.reviewCount} reviews` : ''}
             </span>
           </div>
         </div>
 
-        {/* Mobile: horizontal scroll */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 md:hidden scrollbar-hide">
+        {/* Testimonial grid */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-2"
+          style={{ gap: '16px' }}
+        >
           {filtered.map((t, i) => (
             <TestimonialCard key={i} testimonial={t} index={i} />
-          ))}
-        </div>
-
-        {/* Tablet + Desktop: flex wrap for centered last row */}
-        <div className="hidden md:flex md:flex-wrap md:justify-center gap-6">
-          {filtered.map((t, i) => (
-            <div key={i} className="w-full md:w-[calc(50%-0.75rem)]">
-              <TestimonialCard testimonial={t} index={i} />
-            </div>
           ))}
         </div>
       </div>
@@ -136,59 +153,82 @@ function TestimonialCard({ testimonial, index }) {
 
   return (
     <div
-      className={`reveal group min-w-[calc(100vw-3rem)] sm:min-w-[70vw] md:min-w-0 snap-center card-dark-gradient rounded-2xl p-5 sm:p-6 md:p-8 border-l-2 border-l-[var(--color-blue)]/40 hover:border-l-[var(--color-blue)] transition-all duration-300`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      className="reveal"
+      style={{
+        background: 'rgba(255,255,255,0.04)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: '16px',
+        padding: '28px',
+        transition: 'all 0.25s ease',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = 'rgba(14,165,233,0.3)'
+        e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
+        e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
+      }}
     >
-      {/* Quote Icon */}
-      <Quote className="w-7 h-7 md:w-10 md:h-10 mb-4" style={{ color: 'var(--color-blue)', opacity: 0.6 }} />
-
       {/* Stars */}
-      <div className="flex gap-0.5 mb-4">
+      <div style={{ display: 'flex', gap: '3px', marginBottom: '16px' }}>
         {[...Array(starCount)].map((_, i) => (
-          <Star key={i} className="w-4.5 h-4.5 fill-[var(--color-accent)] text-[var(--color-accent)]" />
+          <Star key={i} style={{ width: '16px', height: '16px', fill: '#F59E0B', color: '#F59E0B' }} />
         ))}
       </div>
 
-      {/* Quote Text */}
+      {/* Quote */}
       <p
-        className="text-[var(--color-cream)]/80 text-base leading-relaxed mb-6"
-        style={{ fontFamily: 'var(--font-body)' }}
+        style={{
+          color: 'rgba(230,237,243,0.8)',
+          fontSize: '15px',
+          lineHeight: 1.7,
+          marginBottom: '24px',
+          fontFamily: 'var(--font-body)',
+        }}
       >
-        &ldquo;{quote}&rdquo;
+        "{quote}"
       </p>
 
-      {/* Customer Info */}
-      <div className="flex items-center gap-3 pt-4 border-t border-[var(--color-cream)]/8">
+      {/* Customer */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '16px' }}>
         {validImage ? (
           <img
             src={image}
             alt={name}
-            className="w-11 h-11 rounded-full object-cover ring-2 ring-[var(--color-blue)]/30 shadow-[0_0_12px_rgba(14,165,233,0.2)]"
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              objectFit: 'cover',
+            }}
             loading="lazy"
-            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
           />
-        ) : null}
-        <div
-          className={`w-11 h-11 rounded-full ring-2 ring-[var(--color-blue)]/30 shadow-[0_0_12px_rgba(14,165,233,0.2)] items-center justify-center text-white font-bold text-sm shrink-0`}
-          style={{
-            backgroundColor: bgColor,
-            display: validImage ? 'none' : 'flex',
-            fontFamily: 'var(--font-heading)',
-          }}
-        >
-          {initials}
-        </div>
-        <div>
-          <p
-            className="text-[var(--color-cream)] font-semibold text-sm"
-            style={{ fontFamily: 'var(--font-heading)' }}
+        ) : (
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              background: bgColor,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#FFFFFF',
+              fontWeight: 700,
+              fontSize: '14px',
+              fontFamily: 'var(--font-heading)',
+              flexShrink: 0,
+            }}
           >
+            {initials}
+          </div>
+        )}
+        <div>
+          <p style={{ color: '#E6EDF3', fontWeight: 600, fontSize: '14px', fontFamily: 'var(--font-heading)' }}>
             {name}
           </p>
-          <p
-            className="text-[var(--color-blue)] text-xs"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
+          <p style={{ color: '#0EA5E9', fontSize: '12px', fontFamily: 'var(--font-body)' }}>
             {detail}
           </p>
         </div>
